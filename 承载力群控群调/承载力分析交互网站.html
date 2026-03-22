@@ -1,0 +1,2174 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>承载力分析交互网站</title>
+  <style>
+    :root {
+      --primary: #0f3ca8;
+      --primary-600: #2161e1;
+      --primary-100: #e9f3ff;
+      --bg: #edf3ff;
+      --card: #ffffff;
+      --text: #182c52;
+      --muted: #5f7296;
+      --line: #d7e4f8;
+      --shadow: 0 18px 36px rgba(16, 61, 149, 0.14);
+      --tech-cyan: #19c6ff;
+      --tech-blue: #2f72ff;
+      --tech-deep: #0a2f83;
+      --ok: #12945f;
+      --mid: #d08600;
+      --bad: #d53a4a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Rajdhani", "DIN Alternate", "Source Han Sans SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(39, 167, 255, 0.2), transparent 34%),
+        radial-gradient(circle at 92% 0%, rgba(50, 104, 255, 0.24), transparent 30%),
+        linear-gradient(180deg, #edf3ff 0%, #f4f8ff 45%, #eef4ff 100%);
+      background-attachment: fixed;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 64px;
+      padding: 0 clamp(16px, 4vw, 44px);
+      background: linear-gradient(120deg, #07216d 0%, #0b3ea8 45%, #0d57b8 100%);
+      border-bottom: 1px solid rgba(133, 201, 255, 0.35);
+      box-shadow: 0 8px 26px rgba(9, 34, 96, 0.34);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(120, 220, 255, 0.85) 48%, transparent 100%);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #f4f9ff;
+    }
+
+    .brand::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #c7f7ff 0%, #32dbff 55%, #1398d8 100%);
+      box-shadow: 0 0 0 4px rgba(50, 219, 255, 0.16), 0 0 20px rgba(25, 198, 255, 0.45);
+      animation: beacon-pulse 2.4s ease-in-out infinite;
+    }
+
+    .topbar-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .home-link {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #f8fbff;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.1) 100%);
+      box-shadow: 0 6px 14px rgba(7, 22, 72, 0.24);
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .home-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(7, 22, 72, 0.28);
+    }
+
+    .home-link:active {
+      transform: translateY(0);
+    }
+
+    .home-link svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .account-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      max-width: 260px;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      padding: 6px 12px;
+      color: #ffffff;
+      font-size: 12px;
+      letter-spacing: 0.2px;
+    }
+
+    .account-chip strong {
+      max-width: 180px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: #ffffff;
+    }
+
+    .wrap {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 30px 24px 32px;
+      position: relative;
+    }
+
+    .wrap::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      top: 18px;
+      height: 300px;
+      border-radius: 24px;
+      background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.72), rgba(236, 246, 255, 0.34)),
+        repeating-linear-gradient(90deg, rgba(38, 111, 255, 0.08) 0 1px, transparent 1px 38px),
+        repeating-linear-gradient(0deg, rgba(38, 111, 255, 0.07) 0 1px, transparent 1px 38px);
+      opacity: 0.44;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      text-align: left;
+      margin: 6px auto 20px;
+      padding: 30px 30px 24px;
+      border-radius: 22px;
+      border: 1px solid rgba(109, 162, 255, 0.45);
+      background: linear-gradient(128deg, rgba(255, 255, 255, 0.94) 0%, rgba(238, 246, 255, 0.95) 44%, rgba(231, 239, 255, 0.95) 100%);
+      box-shadow: 0 22px 44px rgba(16, 58, 145, 0.16);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      right: -140px;
+      top: -210px;
+      width: 430px;
+      height: 430px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(67, 186, 255, 0.42) 0%, rgba(67, 186, 255, 0.12) 44%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 0%, rgba(44, 145, 255, 0.09) 36%, transparent 72%);
+      pointer-events: none;
+    }
+
+    .hero h2 {
+      margin: 0;
+      font-size: clamp(28px, 4.2vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 1.8px;
+      background: linear-gradient(120deg, #1a45a1 0%, #276ce8 46%, #13a8dc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero .sub {
+      margin-top: 8px;
+      font-size: 16px;
+      color: #4d628a;
+      line-height: 1.72;
+    }
+
+    .hero-signal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .hero-signal span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(84, 146, 244, 0.4);
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.84), rgba(236, 245, 255, 0.92));
+      color: #1e4b93;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .hero-signal span::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #cbf8ff 0%, #39d0ff 70%, #228ed0 100%);
+      box-shadow: 0 0 0 4px rgba(65, 176, 255, 0.14);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0 14px;
+      flex-wrap: wrap;
+    }
+
+    .tabs button {
+      border: 1px solid #c3d7f8;
+      background: linear-gradient(145deg, #ffffff, #eaf3ff);
+      color: #264c92;
+      padding: 9px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 0.25px;
+      box-shadow: 0 8px 16px rgba(44, 98, 203, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .tabs button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 11px 18px rgba(44, 98, 203, 0.16);
+      border-color: #9fc0ff;
+    }
+
+    .tabs .on {
+      background: linear-gradient(120deg, #1bbff3 0%, #2f72ff 56%, #2a5bdd 100%);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 10px 18px rgba(31, 95, 217, 0.28);
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.on {
+      display: block;
+      animation: panel-enter 0.26s ease;
+    }
+
+    .card {
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(238, 246, 255, 0.92));
+      border: 1px solid rgba(128, 168, 232, 0.36);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 16px 34px rgba(18, 66, 160, 0.14);
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      color: #173f88;
+      letter-spacing: 0.5px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .f {
+      border: 1px solid #dce8fb;
+      border-radius: 12px;
+      padding: 10px;
+      background: linear-gradient(120deg, #ffffff, #f4f9ff);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .f:focus-within {
+      border-color: #9fc2ff;
+      box-shadow: 0 0 0 3px rgba(43, 108, 225, 0.14);
+    }
+
+    .f label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #304878;
+    }
+
+    .f input,
+    .f select {
+      width: 100%;
+      margin-top: 6px;
+      border: 1px solid #c9d9f2;
+      border-radius: 9px;
+      padding: 8px;
+      font-size: 14px;
+      color: var(--text);
+      background: #fff;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .f input:focus,
+    .f select:focus {
+      outline: none;
+      border-color: #4b74e1;
+      box-shadow: 0 0 0 2px rgba(75, 116, 225, 0.14);
+    }
+
+    details {
+      margin-top: 8px;
+      border: 1px dashed #bfd3f5;
+      border-radius: 12px;
+      background: #f6faff;
+      padding: 8px 10px;
+    }
+
+    details summary {
+      cursor: pointer;
+      color: #24488d;
+      font-weight: 700;
+    }
+
+    .actions {
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 9px;
+      padding: 8px 14px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.2px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .p {
+      background: linear-gradient(120deg, #1bbff3 0%, #2f72ff 56%, #2a5bdd 100%);
+      color: #fff;
+      box-shadow: 0 8px 14px rgba(37, 100, 211, 0.24);
+    }
+
+    .s {
+      background: #ebf4ff;
+      color: #19468f;
+      border-color: #c4d9ff;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.02);
+    }
+
+    .strip {
+      margin-top: 12px;
+      border-radius: 12px;
+      color: #fff;
+      padding: 11px 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-weight: 700;
+      box-shadow: 0 10px 18px rgba(19, 66, 164, 0.16);
+    }
+
+    .bad {
+      background: linear-gradient(90deg, #d53a4a, #e35a66);
+    }
+
+    .mid {
+      background: linear-gradient(90deg, #ca8400, #de9f26);
+    }
+
+    .ok {
+      background: linear-gradient(90deg, #0f8454, #1aa669);
+    }
+
+    .kpis {
+      margin-top: 10px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .k {
+      border: 1px solid #dce8fb;
+      border-radius: 12px;
+      padding: 9px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(236, 247, 255, 0.9));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86);
+    }
+
+    .k .n {
+      font-size: 12px;
+      color: #5c7095;
+    }
+
+    .k .v {
+      margin-top: 3px;
+      font-size: 24px;
+      font-weight: 800;
+      color: #143d89;
+      letter-spacing: 0.4px;
+    }
+
+    .split {
+      margin-top: 10px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1.2fr 1fr;
+    }
+
+    .box {
+      border: 1px solid #dce8fb;
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+      background: linear-gradient(120deg, #ffffff, #f4f9ff);
+    }
+
+    .big {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+    }
+
+    .table {
+      margin-top: 10px;
+      overflow: auto;
+      border: 1px solid #d6e4f8;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #f9fcff 0%, #f1f7ff 100%);
+    }
+
+    .topology-app {
+      --tz-panel: rgba(247, 251, 255, 0.95);
+      --tz-line: rgba(86, 132, 177, 0.16);
+      --tz-grid: rgba(68, 128, 190, 0.12);
+      --tz-text: #14324d;
+      --tz-muted: #58728c;
+      --tz-accent: #0072bc;
+      --tz-shadow: 0 16px 34px rgba(18, 66, 160, 0.14);
+      margin-top: 8px;
+      color: var(--tz-text);
+    }
+
+    .topology-app * {
+      box-sizing: border-box;
+    }
+
+    .topology-app .page {
+      max-width: none;
+      margin: 0;
+      padding: 4px;
+    }
+
+    .topology-app .header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .topology-app .title-block h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0.3px;
+      color: #173f88;
+    }
+
+    .topology-app .title-block p {
+      margin: 6px 0 0;
+      max-width: 840px;
+      color: #4f6890;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .topology-app .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(110px, 1fr));
+      gap: 8px;
+      min-width: 460px;
+    }
+
+    .topology-app .stat {
+      background: var(--tz-panel);
+      border: 1px solid var(--tz-line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.84);
+    }
+
+    .topology-app .stat-label {
+      font-size: 12px;
+      color: var(--tz-muted);
+      letter-spacing: 0.4px;
+    }
+
+    .topology-app .stat-value {
+      margin-top: 4px;
+      font-size: 20px;
+      font-weight: 800;
+      color: #143d89;
+      line-height: 1.2;
+    }
+
+    .topology-app .layout {
+      display: grid;
+      grid-template-columns: minmax(760px, 1fr) 330px;
+      gap: 10px;
+    }
+
+    .topology-app .board,
+    .topology-app .sidebar {
+      background: var(--tz-panel);
+      border: 1px solid var(--tz-line);
+      border-radius: 14px;
+      box-shadow: var(--tz-shadow);
+      min-height: 700px;
+    }
+
+    .topology-app .board {
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+      background-image:
+        linear-gradient(var(--tz-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--tz-grid) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+
+    .topology-app .board-toolbar {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .topology-app .board-meta {
+      font-size: 13px;
+      color: var(--tz-muted);
+      line-height: 1.45;
+    }
+
+    .topology-app .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .topology-app .search-box,
+    .topology-app .zoom-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(86, 132, 177, 0.2);
+    }
+
+    .topology-app .search-box input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 220px;
+      font-size: 13px;
+      color: var(--tz-text);
+      padding: 0 6px;
+    }
+
+    .topology-app .zoom-label {
+      min-width: 52px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #163f86;
+    }
+
+    .topology-app .btn.small {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      padding: 0;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .topology-app .view-nav {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .topology-app .breadcrumbs {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      min-height: 32px;
+    }
+
+    .topology-app .crumb-btn {
+      border: 1px solid rgba(86, 132, 177, 0.24);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--tz-text);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      line-height: 1.3;
+    }
+
+    .topology-app .crumb-btn.active {
+      background: rgba(0, 114, 188, 0.15);
+      border-color: rgba(0, 114, 188, 0.35);
+      font-weight: 700;
+      cursor: default;
+    }
+
+    .topology-app .crumb-sep {
+      color: var(--tz-muted);
+      font-size: 12px;
+    }
+
+    .topology-app .legend {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .topology-app .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid #cde0fb;
+      font-size: 12px;
+      color: #29456f;
+    }
+
+    .topology-app .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .topology-app .svg-wrap {
+      position: relative;
+      z-index: 1;
+      overflow: auto;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px solid rgba(86, 132, 177, 0.18);
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      height: 680px;
+      min-height: 560px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .topology-app .svg-wrap::-webkit-scrollbar {
+      display: none;
+    }
+
+    .topology-app .svg-wrap.dragging {
+      cursor: grabbing;
+    }
+
+    .topology-app svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      min-width: 1280px;
+      transform-origin: top left;
+      transition: none;
+      text-rendering: geometricPrecision;
+      shape-rendering: geometricPrecision;
+    }
+
+    .topology-app .edge {
+      stroke-width: 3;
+      fill: none;
+      opacity: 0.72;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .topology-app .edge-normal { stroke: #3b82f6; }
+    .topology-app .edge-warning { stroke: #f59e0b; stroke-dasharray: 7 5; }
+    .topology-app .edge-overload { stroke: #ef4444; stroke-dasharray: 6 4; }
+    .topology-app .edge.selected {
+      stroke-width: 5;
+      opacity: 1;
+    }
+
+    .topology-app .node { cursor: pointer; outline: none; }
+    .topology-app .node circle,
+    .topology-app .node rect {
+      stroke: #ffffff;
+      stroke-width: 2.6;
+      transition: all 0.2s ease;
+    }
+
+    .topology-app .node:hover circle,
+    .topology-app .node:hover rect {
+      stroke-width: 4;
+      filter: brightness(1.06);
+    }
+
+    .topology-app .node.selected circle,
+    .topology-app .node.selected rect {
+      stroke: #0f172a;
+      stroke-width: 4.2;
+    }
+
+    .topology-app .node-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      fill: #ffffff;
+      paint-order: stroke;
+      stroke: rgba(8, 25, 44, 0.52);
+      stroke-width: 1.1;
+      pointer-events: none;
+    }
+
+    .topology-app .node-sub {
+      font-size: 11px;
+      font-weight: 600;
+      text-anchor: middle;
+      fill: #153955;
+      paint-order: stroke;
+      stroke: rgba(255, 255, 255, 0.65);
+      stroke-width: 0.6;
+      pointer-events: none;
+    }
+
+    .topology-app .sidebar {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .topology-app .sidebar h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #173f88;
+    }
+
+    .topology-app .node-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      color: var(--tz-muted);
+      font-size: 13px;
+    }
+
+    .topology-app .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .topology-app .info-panel {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(86, 132, 177, 0.16);
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .topology-app .info-panel h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: #4f6890;
+    }
+
+    .topology-app .kv-list {
+      display: grid;
+      gap: 8px;
+      max-height: 240px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .topology-app .kv-row {
+      border-bottom: 1px dashed rgba(86, 132, 177, 0.2);
+      padding-bottom: 6px;
+    }
+
+    .topology-app .kv-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .topology-app .kv-row strong {
+      display: block;
+      color: var(--tz-muted);
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .topology-app .kv-row div {
+      font-size: 13px;
+      line-height: 1.35;
+      word-break: break-all;
+    }
+
+    .topology-app .path-list,
+    .topology-app .log-list {
+      display: grid;
+      gap: 6px;
+      max-height: 150px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .topology-app .path-item,
+    .topology-app .log-item {
+      border-radius: 10px;
+      background: rgba(15, 50, 79, 0.06);
+      padding: 8px;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .topology-app .path-item span {
+      display: block;
+      color: var(--tz-muted);
+      margin-top: 3px;
+      word-break: break-all;
+    }
+
+    .topology-app .tooltip {
+      position: fixed;
+      pointer-events: none;
+      z-index: 80;
+      background: rgba(15, 40, 65, 0.92);
+      color: #fff;
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 12px;
+      line-height: 1.45;
+      min-width: 220px;
+      max-width: 360px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.12s ease, transform 0.12s ease;
+    }
+
+    .topology-app .tooltip.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .topology-app .tooltip-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #bfe6ff;
+    }
+
+    .topology-app .error {
+      margin-top: 10px;
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(239, 68, 68, 0.12);
+      color: #991b1b;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      font-size: 13px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 860px;
+    }
+
+    th,
+    td {
+      padding: 9px;
+      border-bottom: 1px solid #e7eef9;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    th {
+      text-align: left;
+      color: #29456f;
+      background: #f4f8ff;
+    }
+
+    tr:hover td {
+      background: rgba(241, 248, 255, 0.7);
+    }
+
+    .w {
+      background: rgba(223, 177, 89, 0.2);
+      color: #9c6800;
+      font-weight: 700;
+    }
+
+    .d {
+      background: rgba(214, 63, 77, 0.15);
+      color: #b22434;
+      font-weight: 700;
+    }
+
+    .link {
+      border: 0;
+      background: none;
+      color: var(--primary-600);
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 27, 74, 0.52);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      z-index: 60;
+    }
+
+    .modal.on {
+      display: flex;
+    }
+
+    .mc {
+      background: linear-gradient(125deg, #eaf2ff 0%, #f5faff 52%, #ffffff 100%);
+      border: 1px solid #c8dafb;
+      border-radius: 12px;
+      width: min(760px, 96vw);
+      box-shadow: 0 30px 64px rgba(14, 42, 114, 0.34);
+    }
+
+    .mh {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-bottom: 1px solid #d6e4f8;
+      font-weight: 700;
+      color: #21468f;
+      letter-spacing: 0.3px;
+    }
+
+    .mb {
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1.2fr 1fr;
+    }
+
+    .topo,
+    .meta {
+      border: 1px solid #d6e4f8;
+      border-radius: 10px;
+      padding: 8px;
+      background: #fff;
+    }
+
+    .meta div {
+      padding: 6px 0;
+      border-bottom: 1px dashed #e7eff8;
+      font-size: 13px;
+      color: #34526f;
+    }
+
+    .meta div:last-child {
+      border: 0;
+    }
+
+    small {
+      color: #5f7296;
+      font-size: 12px;
+    }
+
+    .qc-app {
+      display: grid;
+      gap: 12px;
+    }
+
+    .qc-card {
+      background: #fff;
+      border: 1px solid #d9e7fb;
+      border-radius: 12px;
+      box-shadow: 0 12px 26px rgba(25, 58, 143, 0.1);
+      overflow: hidden;
+    }
+
+    .qc-title {
+      height: 46px;
+      padding: 0 14px;
+      border-bottom: 1px solid #e8f0ff;
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #173e8f;
+      background: linear-gradient(120deg, #f3f8ff 0%, #ffffff 68%);
+    }
+
+    .qc-upload-wrap {
+      margin: 12px;
+      border: 1px solid #d9e7fb;
+      border-radius: 10px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 18px;
+      background: linear-gradient(135deg, rgba(239, 247, 255, 0.65), rgba(255, 255, 255, 0.94));
+    }
+
+    .qc-field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .qc-field > label {
+      font-size: 14px;
+      color: #274b95;
+      font-weight: 600;
+    }
+
+    .qc-file-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .qc-pick-btn {
+      height: 30px;
+      padding: 0 12px;
+      border: 1px solid #cadcf8;
+      border-radius: 6px;
+      background: #fff;
+      color: #2b4f98;
+      cursor: pointer;
+      font-size: 13px;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .qc-pick-btn:hover {
+      border-color: #99b7f0;
+      box-shadow: 0 0 0 3px rgba(101, 154, 255, 0.12);
+    }
+
+    .qc-file-name {
+      font-size: 12px;
+      color: #6d7fa0;
+      max-width: 260px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .qc-file-row input {
+      display: none;
+    }
+
+    .qc-run-btn {
+      height: 34px;
+      padding: 0 14px;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      color: #fff;
+      background: linear-gradient(120deg, #3e87ff, #2d6ff1);
+      box-shadow: 0 8px 16px rgba(47, 114, 255, 0.24);
+    }
+
+    .qc-run-btn:hover {
+      filter: brightness(1.04);
+    }
+
+    .qc-table-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      border-top: 1px solid #edf2fe;
+      border-bottom: 1px solid #edf2fe;
+      background: #fbfdff;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .qc-table-head-title {
+      font-size: 21px;
+      font-weight: 700;
+      color: #203d7b;
+    }
+
+    .qc-strategy-tabs {
+      display: flex;
+      gap: 6px;
+    }
+
+    .qc-tab {
+      height: 30px;
+      min-width: 58px;
+      border-radius: 6px;
+      border: 1px solid #d8e4fa;
+      background: #fff;
+      color: #4662a3;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .qc-tab.active {
+      border-color: transparent;
+      background: linear-gradient(120deg, #3e87ff, #2d6ff1);
+      color: #fff;
+      box-shadow: 0 8px 14px rgba(47, 114, 255, 0.2);
+    }
+
+    .qc-table-box {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0 10px 10px;
+    }
+
+    .qc-table-box table {
+      width: 100%;
+      min-width: 1420px;
+      border-collapse: collapse;
+    }
+
+    .qc-table-box th,
+    .qc-table-box td {
+      padding: 8px;
+      font-size: 12px;
+      white-space: nowrap;
+      border-bottom: 1px solid #edf2fe;
+    }
+
+    .qc-table-box th {
+      background: #f7faff;
+      color: #2f4f8e;
+      text-align: left;
+    }
+
+    .qc-table-box tbody tr:hover td {
+      background: #f8fbff;
+    }
+
+    .qc-yes {
+      color: #dd4f62;
+      font-weight: 700;
+    }
+
+    .qc-no {
+      color: #617599;
+    }
+
+    .qc-metric {
+      color: #2a62d9;
+      font-weight: 700;
+    }
+
+    .qc-warn-cell {
+      background: rgba(233, 198, 104, 0.22);
+      color: #96640b;
+      font-weight: 700;
+    }
+
+    .qc-danger-cell {
+      background: rgba(225, 91, 105, 0.14);
+      color: #ca4357;
+      font-weight: 700;
+    }
+
+    .qc-good-cell {
+      color: #25a96c;
+      font-weight: 700;
+    }
+
+    .qc-link-btn {
+      border: none;
+      background: none;
+      color: #2f6cf6;
+      cursor: pointer;
+      padding: 0;
+      font-weight: 600;
+    }
+
+    .qc-pager {
+      height: 40px;
+      padding: 0 14px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #6e7fa0;
+    }
+
+    .qc-pager b {
+      display: inline-grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border: 1px solid #7ba3f4;
+      color: #2d6ff1;
+      border-radius: 6px;
+    }
+
+    .qc-toast {
+      position: fixed;
+      top: 74px;
+      right: 14px;
+      padding: 8px 12px;
+      border: 1px solid #d2e0fb;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 8px 18px rgba(32, 66, 155, 0.14);
+      font-size: 12px;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.18s, transform 0.18s;
+      z-index: 65;
+      pointer-events: none;
+    }
+
+    .qc-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .qc-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 22, 52, 0.48);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      z-index: 70;
+    }
+
+    .qc-modal.show {
+      display: flex;
+    }
+
+    .qc-modal-card {
+      width: min(1060px, 97vw);
+      background: #fff;
+      border: 1px solid #cfdbf7;
+      border-radius: 9px;
+      overflow: hidden;
+      box-shadow: 0 28px 62px rgba(13, 38, 96, 0.32);
+    }
+
+    .qc-modal-head {
+      height: 48px;
+      padding: 0 14px;
+      border-bottom: 1px solid #e6eefc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #224387;
+    }
+
+    .qc-modal-close {
+      border: none;
+      background: none;
+      font-size: 24px;
+      color: #8ea0c3;
+      cursor: pointer;
+    }
+
+    .qc-modal-body {
+      padding: 12px 14px;
+    }
+
+    .qc-summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .qc-summary-item {
+      height: 36px;
+      border: 1px solid #d9e3f8;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      font-size: 14px;
+    }
+
+    .qc-summary-item.before {
+      background: #fff6f8;
+      color: #cf4a5d;
+    }
+
+    .qc-summary-item.after {
+      background: #f5fcf8;
+      color: #2b9f66;
+    }
+
+    .qc-legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: #44567f;
+      margin: 8px 0;
+    }
+
+    .qc-legend-item {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .qc-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .qc-line {
+      width: 28px;
+      border-top: 3px solid #ec4f63;
+      display: inline-block;
+    }
+
+    .qc-topology {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .qc-topology-panel {
+      border: 1px solid #dbe5fb;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .qc-topology-title {
+      height: 32px;
+      display: grid;
+      place-items: center;
+      background: #f7faff;
+      border-bottom: 1px solid #e7eefc;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .qc-topology-panel > svg {
+      width: 100%;
+      height: 410px;
+      display: block;
+      background: linear-gradient(180deg, #fff, #fbfdff);
+    }
+
+    @keyframes beacon-pulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.15);
+      }
+    }
+
+    @keyframes panel-enter {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero {
+        padding: 24px 22px 20px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .grid,
+      .kpis,
+      .split,
+      .mb {
+        grid-template-columns: 1fr;
+      }
+
+      .topology-app .header {
+        display: none;
+      }
+
+      .topology-app .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .topology-app .board,
+      .topology-app .sidebar {
+        min-height: 520px;
+      }
+
+      .topology-app .svg-wrap {
+        height: 540px;
+        min-height: 440px;
+      }
+
+      .k .v {
+        font-size: 20px;
+      }
+
+      .qc-upload-wrap,
+      .qc-summary,
+      .qc-topology {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .wrap {
+        padding: 18px 14px 26px;
+      }
+
+      .topbar {
+        padding: 0 16px;
+      }
+
+      .brand {
+        font-size: 18px;
+      }
+
+      .topbar-actions {
+        gap: 8px;
+      }
+
+      .account-chip {
+        padding: 6px 10px;
+      }
+
+      .account-chip span {
+        display: none;
+      }
+
+      .account-chip strong {
+        max-width: 120px;
+      }
+
+      .hero h2 {
+        font-size: 30px;
+      }
+
+      .hero .sub {
+        font-size: 14px;
+      }
+
+      .hero-signal span {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">赫兹电站</div>
+    <div class="topbar-actions">
+      <a class="home-link" href="../index.html?v=20260322j" aria-label="返回主页" title="返回主页">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.32 3.28a1 1 0 0 1 1.36 0l9 7.88a1 1 0 1 1-1.32 1.5L19 11.54V19a2 2 0 0 1-2 2h-3.5a1 1 0 0 1-1-1v-4.25h-1V20a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-7.46L3.64 12.66a1 1 0 1 1-1.32-1.5l9-7.88Z"/></svg>
+      </a>
+      <div class="account-chip"><span>账户：</span><strong id="topbarAccount">admin</strong></div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="hero">
+      <h2>光伏承载力交互分析平台</h2>
+      <div class="sub">本平台集成台区光伏承载力测算、低压配网风险评估、拓扑联动与群控群调策略分析。</div>
+      <div class="hero-signal"><span>配变计算</span><span>低压批量分析</span><span>拓扑风险预览</span><span>台区图谱联动</span></div>
+    </div>
+
+    <div class="tabs"><button class="on" data-t="t1">配电变压器承载力分析</button><button data-t="t2">低压配电网承载力分析</button><button data-t="t3">台区拓扑图</button><button data-t="t4">群控群调策略分析</button></div>
+
+    <section id="t1" class="panel on"><div class="card"><h3>配电变压器光伏承载力分析</h3>
+    <div class="grid">
+    <div class="f"><label>* 变压器额定容量(kVA)</label><input id="rk" type="number" value="250"></div>
+    <div class="f"><label>* 已接入分布式电源容量(kW)</label><input id="ep" type="number" value="187"></div>
+    <div class="f"><label>* 工作日午间典型负荷(kW)</label><input id="nl" type="number" value="80"></div>
+    <div class="f"><label>* 历史最大反向负载率(%)</label><input id="rr" type="number" value="115"></div>
+    </div>
+    <details><summary>可选参数</summary><div class="grid" style="margin-top:8px">
+    <div class="f"><label>分布式电源容量系数</label><input id="cf" type="number" step="0.01" value="0.85"></div>
+    <div class="f"><label>安全裕度(%)</label><input id="sm" type="number" step="0.1" value="10"></div>
+    <div class="f"><label>过电压相关性指标</label><input id="vc" type="number" step="0.01" value="0.80"></div>
+    <div class="f"><label>过电压相关性限制阈值</label><input id="vl" type="number" step="0.01" value="0.50"></div>
+    <div class="f"><label>低压侧线电压(kV)</label><input id="lv" type="number" step="0.01" value="0.38"></div>
+    <div class="f"><label>过流保护系数</label><input id="pf" type="number" step="0.01" value="1.08"></div>
+    </div></details>
+    <div class="actions"><button id="r1" class="btn s">恢复默认值</button><button id="c1" class="btn p">开始计算</button></div>
+    <div id="s1" class="strip bad"><div id="z1">红区 - 暂停接入</div><div>最终可接入容量: <span id="fc">0.00</span> kW</div></div>
+    <div class="kpis">
+    <div class="k"><div class="n">过流保护定值</div><div class="v" id="i1">410.82 A</div></div>
+    <div class="k"><div class="n">反向最大电流</div><div class="v" id="i2">472.44 A</div></div>
+    <div class="k"><div class="n">可接入容量(安全裕度)</div><div class="v" id="i3">74.53 kW</div></div>
+    <div class="k"><div class="n">分布式电源容量系数</div><div class="v" id="i4">0.85</div></div>
+    <div class="k"><div class="n">过电压相关性指标</div><div class="v" id="i5">0.80</div></div>
+    <div class="k"><div class="n">过电压限制阈值</div><div class="v" id="i6">0.50</div></div>
+    </div>
+    <small>说明：计算结果用于快速方案评估，详细工程应用请结合现场模型复核。</small>
+    </div></section>
+
+    <section id="t2" class="panel"><div class="card"><h3>低压配电网光伏承载力分析</h3>
+    <div class="grid">
+    <div class="f"><label>单台配变数据-电流电压(XLSX)</label><input id="f1" type="file" accept=".xlsx,.xls,.csv"><small id="fs1">未选择文件</small></div>
+    <div class="f"><label>单台配变数据-有功无功(XLSX)</label><input id="f2" type="file" accept=".xlsx,.xls,.csv"><small id="fs2">未选择文件</small></div>
+    <div class="f"><label>低压用户数据-电流电压(XLSX)</label><input id="f3" type="file" accept=".xlsx,.xls,.csv"><small id="fs3">未选择文件</small></div>
+    <div class="f"><label>台区CIM文件(XML)</label><input id="f4" type="file" accept=".xml"><small id="fs4">未选择文件</small></div>
+    </div>
+    <div class="grid" style="margin-top:8px">
+    <div class="f"><label>采样点数量</label><input id="sn" type="number" value="8" min="6" max="96"></div>
+    <div class="f"><label>导线过载占比告警阈值(%)</label><input id="ow" type="number" value="12"></div>
+    <div class="f"><label>导线过载占比严重阈值(%)</label><input id="od" type="number" value="22"></div>
+    <div class="f"><label>电压越限占比告警阈值(%)</label><input id="vw" type="number" value="10"></div>
+    </div>
+    <div class="actions"><button id="r2" class="btn s">重置参数</button><button id="c2" class="btn p">开始分析</button></div>
+    <div class="split">
+    <div class="box"><div>综合承载力指标</div><div id="gi" class="big" style="color:#2f62c8">78.5%</div></div>
+    <div class="box"><div>风险等级</div><div id="gr" class="big" style="color:#d08600">中</div><small id="gh">建议按时段开展消纳优化与调压策略验证</small></div>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#56708a" id="tm">分析时间: --</div>
+    <div class="table"><table><thead><tr><th>序号</th><th>采样时间点</th><th>过载导线数</th><th>过载导线占比</th><th>电压越限用户数</th><th>电压越限用户占比</th><th>操作</th></tr></thead><tbody id="tb"></tbody></table></div>
+    </div></section>
+
+    <section id="t3" class="panel"><div class="card"><h3>台区拓扑图</h3>
+    <div class="topology-app">
+      <div class="page">
+        <header class="header">
+          <div class="title-block">
+            <h1 id="pageTitle">台区拓扑图</h1>
+            <p id="pageDesc">基于图模和计量数据自动生成。悬停或点击任意节点，可查看用户编号、表计资产编号、上下游关系与匹配状态。</p>
+          </div>
+          <div class="stats">
+            <div class="stat"><div class="stat-label">台区编号</div><div class="stat-value" id="statArea">-</div></div>
+            <div class="stat"><div class="stat-label">总节点数</div><div class="stat-value" id="statNode">0</div></div>
+            <div class="stat"><div class="stat-label">电表节点</div><div class="stat-value" id="statMeter">0</div></div>
+            <div class="stat"><div class="stat-label">未入图用户</div><div class="stat-value" id="statUnmatched">0</div></div>
+          </div>
+        </header>
+
+        <div class="layout">
+          <section class="board">
+            <div class="board-toolbar">
+              <div class="board-meta" id="boardMeta">正在加载拓扑数据...</div>
+              <div class="controls">
+                <div class="search-box">
+                  <input id="searchInput" type="text" placeholder="搜索用户编号/节点名称/节点编号">
+                  <button class="btn p" id="searchBtn" type="button">定位</button>
+                </div>
+                <div class="zoom-controls">
+                  <button class="btn s small" id="zoomInBtn" type="button">+</button>
+                  <button class="btn s small" id="zoomOutBtn" type="button">−</button>
+                  <button class="btn s" id="zoomResetBtn" type="button">重置</button>
+                  <div class="zoom-label" id="zoomLabel">100%</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="view-nav">
+              <div class="breadcrumbs" id="breadcrumbs"></div>
+              <button class="btn s" id="backLevelBtn" type="button">返回上层</button>
+            </div>
+
+            <div class="legend">
+              <span><i class="dot" style="background:#2e6b3c"></i>配变</span>
+              <span><i class="dot" style="background:#7c3aed"></i>分支</span>
+              <span><i class="dot" style="background:#ea580c"></i>接入点</span>
+              <span><i class="dot" style="background:#2563eb"></i>图模+计量电表</span>
+              <span><i class="dot" style="background:#f59e0b"></i>待核对电表</span>
+              <span><i class="dot" style="background:#ef4444"></i>过载链路</span>
+            </div>
+
+            <div class="svg-wrap" id="svgWrap">
+              <svg id="topologySvg" viewBox="0 0 1600 1000" aria-label="台区拓扑图"></svg>
+            </div>
+            <div class="error" id="errorBox" style="display:none;"></div>
+          </section>
+
+          <aside class="sidebar">
+            <h2 id="infoName">请选择节点</h2>
+            <div class="node-meta">
+              <span class="badge" id="infoBadge" style="background:#334155;">节点</span>
+              <span id="infoCode">-</span>
+            </div>
+            <div class="info-panel"><h3>基础档案</h3><div class="kv-list" id="detailList"></div></div>
+            <div class="info-panel"><h3>运行摘要</h3><div class="kv-list" id="summaryList"></div></div>
+            <div class="info-panel"><h3>上下游关系</h3><div class="path-list" id="relationList"></div></div>
+            <div class="info-panel"><h3>近期记录</h3><div class="log-list" id="logList"></div></div>
+          </aside>
+        </div>
+      </div>
+      <div class="tooltip" id="tooltip"></div>
+    </div>
+    </div></section>
+
+    <section id="t4" class="panel"><div class="card"><h3>群控群调策略分析</h3>
+    <div class="qc-app">
+      <section class="qc-card">
+        <div class="qc-title">群控群调策略分析</div>
+        <div class="qc-upload-wrap">
+          <div class="qc-field">
+            <label>单台配变数据-电流电压数据（XLSX）</label>
+            <div class="qc-file-row"><label class="qc-pick-btn" for="qcF1">选择文件</label><input id="qcF1" type="file" accept=".xlsx,.xls,.csv"><span class="qc-file-name" id="qcN1">未选择文件</span></div>
+          </div>
+          <div class="qc-field">
+            <label>单台配变数据-有功无功数据（XLSX）</label>
+            <div class="qc-file-row"><label class="qc-pick-btn" for="qcF2">选择文件</label><input id="qcF2" type="file" accept=".xlsx,.xls,.csv"><span class="qc-file-name" id="qcN2">未选择文件</span></div>
+          </div>
+          <div class="qc-field">
+            <label>低压用户数据-电流电压数据（XLSX）</label>
+            <div class="qc-file-row"><label class="qc-pick-btn" for="qcF3">选择文件</label><input id="qcF3" type="file" accept=".xlsx,.xls,.csv"><span class="qc-file-name" id="qcN3">未选择文件</span></div>
+          </div>
+          <div class="qc-field">
+            <label>台区CIM文件（XML）</label>
+            <div class="qc-file-row"><label class="qc-pick-btn" for="qcF4">选择文件</label><input id="qcF4" type="file" accept=".xml"><span class="qc-file-name" id="qcN4">未选择文件</span></div>
+            <button class="qc-run-btn" id="qcRun" type="button">开始分析</button>
+          </div>
+        </div>
+        <div class="qc-table-head">
+          <div class="qc-table-head-title">调控策略分析</div>
+          <div class="qc-strategy-tabs" id="qcStrategyTabs"><button class="qc-tab active" data-s="s1" type="button">策略1</button><button class="qc-tab" data-s="s2" type="button">策略2</button><button class="qc-tab" data-s="s3" type="button">策略3</button></div>
+        </div>
+        <div class="qc-table-box"><table><thead><tr><th>序号</th><th>表计资产编号</th><th>用户编号</th><th>用户名称</th><th>用户类型</th><th>是否需调控</th><th>调控开始</th><th>调控结束</th><th>功率阈值</th><th>比例阈值</th></tr></thead><tbody id="qcTb1"></tbody></table></div>
+        <div class="qc-pager"><b>1</b><span>10 条/页</span></div>
+      </section>
+
+      <section class="qc-card">
+        <div class="qc-title">策略效果评估</div>
+        <div class="qc-table-box"><table><thead><tr><th>序号</th><th>采样时间</th><th>过载导线（前）</th><th>过载导线（后）</th><th>过载占比（前）</th><th>过载占比（后）</th><th>越限用户（前）</th><th>越限用户（后）</th><th>越限占比（前）</th><th>越限占比（后）</th><th>操作</th></tr></thead><tbody id="qcTb2"></tbody></table></div>
+        <div class="qc-pager"><b>1</b><span>10 条/页</span></div>
+      </section>
+    </div>
+    </div></section>
+  </div>
+
+  <div id="m" class="modal"><div class="mc"><div class="mh"><span id="mt">台区拓扑示意图</span><button id="mx" class="btn s" style="padding:4px 8px">关闭</button></div>
+  <div class="mb"><div class="topo"><svg id="svg" width="100%" viewBox="0 0 420 240"></svg></div><div class="meta"><div id="mm1">采样时间:</div><div id="mm2">过载占比:</div><div id="mm3">越限占比:</div><div id="mm4">风险等级:</div><div>说明: 节点颜色随风险强度变化。</div></div></div>
+  </div></div>
+  <div class="qc-toast" id="qcToast"></div>
+  <div class="qc-modal" id="qcMo">
+    <div class="qc-modal-card">
+      <div class="qc-modal-head"><span id="qcMt">策略效果对比拓扑图</span><button class="qc-modal-close" id="qcMx" type="button">×</button></div>
+      <div class="qc-modal-body">
+        <div class="qc-summary"><div class="qc-summary-item before" id="qcSb">策略前：</div><div class="qc-summary-item after" id="qcSa">策略后：</div></div>
+        <div class="qc-legend"><span class="qc-legend-item"><span class="qc-dot" style="background:#e95366"></span>变压器</span><span class="qc-legend-item"><span class="qc-dot" style="background:#e98938"></span>光伏</span><span class="qc-legend-item"><span class="qc-dot" style="background:#4b78e7"></span>负荷</span><span class="qc-legend-item"><span class="qc-line"></span>过载导线</span></div>
+        <div class="qc-topology"><div class="qc-topology-panel"><div class="qc-topology-title" style="color:#d44f63;">策略前</div><svg id="qcSv1" viewBox="0 0 500 410"></svg></div><div class="qc-topology-panel"><div class="qc-topology-title" style="color:#2fa166;">策略后</div><svg id="qcSv2" viewBox="0 0 500 410"></svg></div></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./topology-data.js"></script>
+  <script src="./scripts/topology-module.js"></script>
+  <script>
+  const $ = (id) => document.getElementById(id);
+  const N = (id) => Number($(id).value || 0);
+  const C = (v, a, b) => Math.max(a, Math.min(b, v));
+  const F = (x, d = 2) => (Number.isFinite(x) ? x.toFixed(d) : "0.00");
+  const AUTH_STORAGE_KEY = "hzdz_login_user";
+  const AUTH_SESSION_KEY = "hzdz_login_user_session";
+  const AUTH_LAST_USER_KEY = "hzdz_login_last_user";
+  const parseTrim = (value) => (value ?? "").toString().trim();
+  const resolveTopbarUser = () => {
+    try {
+      const sessionUser = parseTrim(sessionStorage.getItem(AUTH_SESSION_KEY));
+      if (sessionUser) return sessionUser;
+    } catch (error) {}
+
+    let rememberedUser = "";
+    try {
+      const raw = parseTrim(localStorage.getItem(AUTH_STORAGE_KEY));
+      if (raw) {
+        if (!raw.startsWith("{")) {
+          rememberedUser = raw;
+        } else {
+          const parsed = JSON.parse(raw);
+          const account = parsed && typeof parsed.account === "string" ? parseTrim(parsed.account) : "";
+          const expiresAt = parsed && typeof parsed.expiresAt === "number" ? parsed.expiresAt : null;
+          if (account) {
+            if (expiresAt != null && expiresAt <= Date.now()) {
+              localStorage.removeItem(AUTH_STORAGE_KEY);
+            } else {
+              rememberedUser = account;
+            }
+          }
+        }
+      }
+    } catch (error) {}
+    if (rememberedUser) return rememberedUser;
+
+    try {
+      const lastUser = parseTrim(localStorage.getItem(AUTH_LAST_USER_KEY));
+      if (lastUser) return lastUser;
+    } catch (error) {}
+
+    return "admin";
+  };
+
+  const topbarAccountNode = $("topbarAccount");
+  if (topbarAccountNode) {
+    topbarAccountNode.textContent = resolveTopbarUser();
+  }
+
+  const gridState = { rows: [] };
+  const topologyTabState = { inited: false };
+  const qcTabState = { inited: false, current: "s1" };
+  const qcUsers = [
+    ["MTR20240001", "USR001", "张三", "居民"],
+    ["MTR20240002", "USR002", "李四", "居民"],
+    ["MTR20240003", "USR003", "王五", "居民"],
+    ["MTR20240004", "USR004", "赵六", "工商业"],
+    ["MTR20240005", "USR005", "钱七", "居民"],
+    ["MTR20240006", "USR006", "孙八", "居民"],
+    ["MTR20240007", "USR007", "周九", "工商业"],
+    ["MTR20240008", "USR008", "吴十", "居民"],
+    ["MTR20240009", "USR009", "郑十一", "居民"],
+    ["MTR20240010", "USR010", "王十二", "居民"]
+  ];
+  const qcProfile = {
+    s1: { name: "策略1", st: "2024-03-15 09:00", c: { 7: [24, 39, "2024-03-15 12:00"], 8: [54, 34, "2024-03-15 13:00"] }, f: 0 },
+    s2: { name: "策略2", st: "2024-03-15 09:00", c: { 4: [36, 48, "2024-03-15 13:00"], 7: [30, 42, "2024-03-15 14:00"], 8: [60, 37, "2024-03-15 14:00"], 9: [20, 28, "2024-03-15 14:00"] }, f: 0.42 },
+    s3: { name: "策略3", st: "2024-03-15 09:00", c: { 4: [28, 36, "2024-03-15 15:00"], 5: [18, 22, "2024-03-15 13:00"], 7: [26, 33, "2024-03-15 15:00"], 8: [40, 29, "2024-03-15 15:00"], 10: [15, 20, "2024-03-15 12:00"] }, f: 0.22 }
+  };
+  const qcEvalRows = [
+    [1, "2026-03-21 10:00", 6, 10.4, 10, 3.9],
+    [2, "2026-03-21 11:00", 16, 26.5, 32, 16.1],
+    [3, "2026-03-21 12:00", 16, 32.3, 40, 17.5],
+    [4, "2026-03-21 13:00", 24, 23.0, 41, 13.3],
+    [5, "2026-03-21 14:00", 19, 24.9, 37, 19.4],
+    [6, "2026-03-21 15:00", 2, 10.7, 10, 3.1],
+    [7, "2026-03-21 16:00", 6, 9.9, 11, 3.8],
+    [8, "2026-03-21 17:00", 4, 10.3, 6, 3.6]
+  ];
+  function ensureTopologyModule() {
+    if (topologyTabState.inited) return;
+    if (typeof window.initEmbeddedTopologyModule !== "function") return;
+    window.initEmbeddedTopologyModule();
+    topologyTabState.inited = true;
+  }
+
+  function initQcModule() {
+    if (qcTabState.inited) return;
+
+    const qcTb1 = $("qcTb1");
+    const qcTb2 = $("qcTb2");
+    const qcToast = $("qcToast");
+    const qcModal = $("qcMo");
+    const qcMt = $("qcMt");
+    const qcSb = $("qcSb");
+    const qcSa = $("qcSa");
+    const qcStrategyTabs = $("qcStrategyTabs");
+    const qcRun = $("qcRun");
+    const qcCloseBtn = $("qcMx");
+
+    if (!qcTb1 || !qcTb2 || !qcToast || !qcModal || !qcMt || !qcSb || !qcSa || !qcStrategyTabs || !qcRun || !qcCloseBtn) {
+      return;
+    }
+
+    const pct = (v) => `${Number(v).toFixed(1)}%`;
+    const qcNodes = [
+      [250, 34, "h"], [250, 84, "j"], [155, 114, "j"], [345, 114, "j"],
+      [95, 168, "j"], [155, 198, "j"], [305, 156, "j"], [350, 200, "j"],
+      [60, 238, "p"], [40, 290, "l"], [100, 286, "l"], [150, 302, "l"],
+      [240, 316, "l"], [300, 312, "l"], [390, 316, "l"], [420, 286, "l"]
+    ];
+    const qcEdges = [
+      [0, 1], [1, 2], [1, 3], [2, 4], [2, 5], [1, 6], [3, 6], [3, 7],
+      [4, 8], [8, 9], [5, 10], [5, 11], [6, 12], [7, 13], [7, 14], [7, 15]
+    ];
+
+    const qcGetEffect = () => {
+      const factor = qcProfile[qcTabState.current].f;
+      return qcEvalRows.map((row) => {
+        const afterLine = Math.round(row[2] * factor);
+        const afterUser = Math.round(row[4] * factor);
+        const afterLineRatio = +(row[3] * factor).toFixed(1);
+        const afterUserRatio = +(row[5] * factor).toFixed(1);
+        return {
+          idx: row[0],
+          t: row[1],
+          bl: row[2],
+          br: row[3],
+          bu: row[4],
+          bur: row[5],
+          al: afterLine,
+          au: afterUser,
+          ar: afterLineRatio,
+          ur: afterUserRatio,
+          dl: row[2] - afterLine,
+          du: row[4] - afterUser
+        };
+      });
+    };
+
+    const qcTip = (msg) => {
+      qcToast.textContent = msg;
+      qcToast.classList.add("show");
+      clearTimeout(qcTip.timer);
+      qcTip.timer = setTimeout(() => qcToast.classList.remove("show"), 1500);
+    };
+
+    const qcRenderStrategy = () => {
+      const profile = qcProfile[qcTabState.current];
+      qcTb1.innerHTML = qcUsers.map((user, idx) => {
+        const key = idx + 1;
+        const conf = profile.c[key];
+        return `<tr><td>${key}</td><td>${user[0]}</td><td>${user[1]}</td><td>${user[2]}</td><td>${user[3]}</td><td class="${conf ? "qc-yes" : "qc-no"}">${conf ? "是" : "否"}</td><td class="${conf ? "qc-metric" : "qc-no"}">${conf ? profile.st : "-"}</td><td class="${conf ? "qc-metric" : "qc-no"}">${conf ? conf[2] : "-"}</td><td class="${conf ? "qc-metric" : "qc-no"}">${conf ? conf[0] : 0}</td><td class="${conf ? "qc-metric" : "qc-no"}">${conf ? `${conf[1]}%` : "0%"}</td></tr>`;
+      }).join("");
+    };
+
+    const qcWarnClass = (v) => (v >= 20 ? "qc-danger-cell" : (v >= 10 ? "qc-warn-cell" : ""));
+    const qcUserWarnClass = (v) => (v >= 15 ? "qc-warn-cell" : "");
+
+    const qcRenderEffect = () => {
+      qcTb2.innerHTML = qcGetEffect().map((row) => `<tr><td>${row.idx}</td><td>${row.t}</td><td>${row.bl}</td><td class="qc-good-cell">${row.al} (↓${row.dl})</td><td class="${qcWarnClass(row.br)}">${pct(row.br)}</td><td class="qc-good-cell">${pct(row.ar)} (↓${pct(row.br - row.ar)})</td><td>${row.bu}</td><td class="qc-good-cell">${row.au} (↓${row.du})</td><td class="${qcUserWarnClass(row.bur)}">${pct(row.bur)}</td><td class="qc-good-cell">${pct(row.ur)} (↓${pct(row.bur - row.ur)})</td><td><button class="qc-link-btn" data-i="${row.idx}" type="button">打开拓扑图</button></td></tr>`).join("");
+    };
+
+    const qcDraw = (svgId, overloadLines, overloadUsers) => {
+      const svg = $(svgId);
+      if (!svg) return;
+      const overloadEdge = new Set();
+      for (let i = 0; i < overloadLines; i += 1) overloadEdge.add(i % qcEdges.length);
+      const limitUsers = qcNodes
+        .map((node, idx) => [node, idx])
+        .filter((pair) => pair[0][2] === "l")
+        .map((pair) => pair[1])
+        .slice(0, Math.max(0, Math.min(8, overloadUsers)));
+      const edgesMarkup = qcEdges
+        .map((edge, idx) => `<line x1="${qcNodes[edge[0]][0]}" y1="${qcNodes[edge[0]][1]}" x2="${qcNodes[edge[1]][0]}" y2="${qcNodes[edge[1]][1]}" stroke="${overloadEdge.has(idx) ? "#ec4f63" : "#b8c2d4"}" stroke-width="${overloadEdge.has(idx) ? 2.8 : 2}" stroke-linecap="round"/>`)
+        .join("");
+      const nodesMarkup = qcNodes.map((node, idx) => {
+        if (node[2] === "h") {
+          return `<rect x="${node[0] - 12}" y="${node[1] - 12}" width="24" height="24" fill="#e95b4a" stroke="#bf3a2f" stroke-width="2"/>`;
+        }
+        if (node[2] === "j") {
+          return `<circle cx="${node[0]}" cy="${node[1]}" r="4" fill="#243045"/>`;
+        }
+        const over = limitUsers.includes(idx);
+        const color = node[2] === "p" ? "#e98938" : "#4b78e7";
+        return `${over ? `<circle cx="${node[0]}" cy="${node[1]}" r="8" fill="none" stroke="#f05064" stroke-width="2"/>` : ""}<circle cx="${node[0]}" cy="${node[1]}" r="6" fill="${color}" stroke="rgba(15,39,86,.28)" stroke-width="1.2"/>`;
+      }).join("");
+      svg.innerHTML = `<rect x="10" y="10" width="480" height="390" rx="8" fill="url(#g${svgId})"/><defs><linearGradient id="g${svgId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#fafdff"/></linearGradient></defs>${edgesMarkup}${nodesMarkup}`;
+    };
+
+    const qcOpenModal = (idx) => {
+      const row = qcGetEffect().find((x) => x.idx === idx);
+      if (!row) return;
+      qcMt.textContent = `策略效果对比拓扑图 - ${row.t}`;
+      qcSb.textContent = `策略前：过载导线 ${row.bl} 条，越限用户 ${row.bu} 户`;
+      qcSa.textContent = `策略后：过载导线 ${row.al} 条，越限用户 ${row.au} 户`;
+      qcDraw("qcSv1", row.bl, row.bu);
+      qcDraw("qcSv2", row.al, row.au);
+      qcModal.classList.add("show");
+    };
+
+    qcStrategyTabs.addEventListener("click", (e) => {
+      const button = e.target.closest("[data-s]");
+      if (!button) return;
+      qcTabState.current = button.dataset.s;
+      qcStrategyTabs.querySelectorAll(".qc-tab").forEach((tab) => tab.classList.toggle("active", tab === button));
+      qcRenderStrategy();
+      qcRenderEffect();
+      qcTip(`${qcProfile[qcTabState.current].name} 已切换`);
+    });
+
+    ["1", "2", "3", "4"].forEach((idx) => {
+      const fileNode = $(`qcF${idx}`);
+      const nameNode = $(`qcN${idx}`);
+      if (!fileNode || !nameNode) return;
+      fileNode.onchange = () => {
+        nameNode.textContent = fileNode.files[0] ? fileNode.files[0].name : "未选择文件";
+      };
+    });
+
+    qcRun.onclick = () => {
+      qcRenderStrategy();
+      qcRenderEffect();
+      qcTip("分析完成，已更新结果");
+    };
+
+    qcTb2.onclick = (e) => {
+      const button = e.target.closest("button[data-i]");
+      if (button) qcOpenModal(Number(button.dataset.i));
+    };
+    qcCloseBtn.onclick = () => qcModal.classList.remove("show");
+    qcModal.onclick = (e) => {
+      if (e.target === qcModal) qcModal.classList.remove("show");
+    };
+
+    qcRenderStrategy();
+    qcRenderEffect();
+    qcTabState.inited = true;
+  }
+
+  [...document.querySelectorAll(".tabs button")].forEach((b) => {
+    b.onclick = () => {
+      document.querySelectorAll(".tabs button").forEach((x) => x.classList.remove("on"));
+      document.querySelectorAll(".panel").forEach((x) => x.classList.remove("on"));
+      b.classList.add("on");
+      $(b.dataset.t).classList.add("on");
+      if (b.dataset.t === "t3") {
+        ensureTopologyModule();
+      }
+      if (b.dataset.t === "t4") {
+        initQcModule();
+      }
+    };
+  });
+
+  function calcTransformer() {
+    const rk = Math.max(1, N("rk"));
+    const ep = Math.max(0, N("ep"));
+    const nl = Math.max(0, N("nl"));
+    const rr = Math.max(0.1, N("rr"));
+    const cf = C(N("cf") || 0.85, 0.1, 2);
+    const sm = C(N("sm") || 10, 0, 60);
+    const vc = C(N("vc") || 0.8, 0.1, 2);
+    const vl = C(N("vl") || 0.5, 0.1, 2);
+    const lv = C(N("lv") || 0.38, 0.2, 1);
+    const pf = C(N("pf") || 1.08, 0.5, 2);
+    const mr = 100;
+
+    const kw = rk * cf;
+    const ip = rk / (Math.sqrt(3) * lv) * pf;
+    const ir = ip * (rr / mr);
+    const cap1 = Math.max(0, kw * (mr / rr) - nl);
+    const cap2 = Math.max(0, (kw - nl) * (vl / vc));
+    const safe = Math.max(0, Math.min(cap1, cap2) * (1 - sm / 100));
+    const fin = Math.max(0, safe - ep);
+
+    let zone = "绿区 - 可继续接入";
+    let zoneClass = "ok";
+    if (fin <= 0 || rr > mr || vc > vl * 1.6) {
+      zone = "红区 - 暂停接入";
+      zoneClass = "bad";
+    } else if (fin < 60 || rr > mr * 0.9 || vc > vl * 1.2) {
+      zone = "黄区 - 谨慎接入";
+      zoneClass = "mid";
+    }
+
+    $("s1").className = `strip ${zoneClass}`;
+    $("z1").textContent = zone;
+    $("fc").textContent = F(fin, 2);
+    $("i1").textContent = `${F(ip, 2)} A`;
+    $("i2").textContent = `${F(ir, 2)} A`;
+    $("i3").textContent = `${F(safe, 2)} kW`;
+    $("i4").textContent = F(cf, 2);
+    $("i5").textContent = F(vc, 2);
+    $("i6").textContent = F(vl, 2);
+  }
+
+  $("c1").onclick = calcTransformer;
+  $("r1").onclick = () => {
+    ["rk", "ep", "nl", "rr", "cf", "sm", "vc", "vl", "lv", "pf"].forEach((k, i) => {
+      $(k).value = [250, 187, 80, 115, 0.85, 10, 0.8, 0.5, 0.38, 1.08][i];
+    });
+    calcTransformer();
+  };
+  ["rk", "ep", "nl", "rr", "cf", "sm", "vc", "vl", "lv", "pf"].forEach((id) => {
+    $(id).onchange = calcTransformer;
+  });
+
+  [["f1", "fs1"], ["f2", "fs2"], ["f3", "fs3"], ["f4", "fs4"]].forEach((a) => {
+    $(a[0]).onchange = (e) => {
+      $(a[1]).textContent = e.target.files[0] ? `已选择: ${e.target.files[0].name}` : "未选择文件";
+    };
+  });
+
+  function makeRand(seed) {
+    let s = seed % 2147483647;
+    if (s <= 0) s += 2147483646;
+    return () => {
+      s = (s * 48271) % 2147483647;
+      return (s - 1) / 2147483646;
+    };
+  }
+
+  function fmtTime(d) {
+    const p = (n) => String(n).padStart(2, "0");
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:00`;
+  }
+
+  function runGridAnalysis() {
+    const n = C(Math.round(N("sn") || 8), 6, 96);
+    const ow = C(N("ow") || 12, 1, 90);
+    const od = Math.max(ow + 1, C(N("od") || 22, 2, 95));
+    const vw = C(N("vw") || 10, 1, 90);
+    const seed = [1, 2, 3, 4].map((i) => $(`f${i}`).files[0]?.name || `f${i}`).join("|").length + n;
+    const rand = makeRand(seed);
+    const base = new Date(2024, 2, 15, 10, 30);
+
+    gridState.rows = [];
+    for (let i = 0; i < n; i += 1) {
+      const t = new Date(+base + i * 18e5);
+      const ol = Math.max(0, Math.round(4 + 11 * Math.sin(i / 2.2) + rand() * 6));
+      const or = C(ol * 1.35 + rand() * 2.8, 0, 45);
+      const vu = Math.max(0, Math.round(10 + 18 * Math.sin(i / 2.8 + 0.8) + rand() * 7));
+      const vr = C(vu * 0.62 + rand() * 2.2, 0, 35);
+      gridState.rows.push({ i: i + 1, t: fmtTime(t), ol, or, vu, vr });
+    }
+
+    const ao = gridState.rows.reduce((s, r) => s + r.or, 0) / n;
+    const av = gridState.rows.reduce((s, r) => s + r.vr, 0) / n;
+    const mo = Math.max(...gridState.rows.map((r) => r.or));
+    const mv = Math.max(...gridState.rows.map((r) => r.vr));
+    const idx = C(100 - ao * 1.1 - av * 1.18 - mo * 0.52 - mv * 0.45, 0, 100);
+
+    $("gi").textContent = `${F(idx, 1)}%`;
+    if (idx >= 85) {
+      $("gr").textContent = "低";
+      $("gr").style.color = "#12945f";
+      $("gh").textContent = "台区余量较充足，可推进新增接入评估";
+    } else if (idx >= 65) {
+      $("gr").textContent = "中";
+      $("gr").style.color = "#d08600";
+      $("gh").textContent = "建议按时段开展消纳优化与调压策略验证";
+    } else {
+      $("gr").textContent = "高";
+      $("gr").style.color = "#d53a4a";
+      $("gh").textContent = "建议暂停新增接入并复核网架与保护定值";
+    }
+
+    $("tm").textContent = `分析时间: ${fmtTime(new Date())}`;
+    const tb = $("tb");
+    tb.innerHTML = "";
+    gridState.rows.forEach((r, j) => {
+      const tr = document.createElement("tr");
+      const oc = r.or >= od ? "d" : (r.or >= ow ? "w" : "");
+      const vc = r.vr >= 18 ? "d" : (r.vr >= vw ? "w" : "");
+      tr.innerHTML = `<td>${r.i}</td><td>${r.t}</td><td>${r.ol}</td><td class="${oc}">${F(r.or, 1)}%</td><td>${r.vu}</td><td class="${vc}">${F(r.vr, 1)}%</td><td><button class="link" data-i="${j}">打开拓扑图</button></td>`;
+      tb.appendChild(tr);
+    });
+  }
+
+  function openTopologyModal(idx) {
+    const r = gridState.rows[idx];
+    if (!r) return;
+    const lv = Math.max(r.or / (N("ow") || 12), r.vr / (N("vw") || 10));
+    const c = lv > 1.3 ? "#d53a4a" : (lv > 0.95 ? "#d08600" : "#1a9b67");
+    $("svg").innerHTML = `<line x1="40" y1="120" x2="120" y2="120" stroke="#7ea8d1" stroke-width="4"/><line x1="120" y1="120" x2="200" y2="75" stroke="#7ea8d1" stroke-width="4"/><line x1="120" y1="120" x2="200" y2="165" stroke="#7ea8d1" stroke-width="4"/><line x1="200" y1="75" x2="300" y2="75" stroke="#7ea8d1" stroke-width="4"/><line x1="200" y1="165" x2="300" y2="165" stroke="#7ea8d1" stroke-width="4"/><circle cx="40" cy="120" r="18" fill="#245f8f"/><circle cx="120" cy="120" r="16" fill="#2b78b5"/><circle cx="200" cy="75" r="14" fill="${c}"/><circle cx="200" cy="165" r="14" fill="${c}"/><circle cx="300" cy="75" r="12" fill="#68a9de"/><circle cx="300" cy="165" r="12" fill="#68a9de"/><text x="30" y="123" fill="#fff" font-size="11">主变</text><text x="109" y="123" fill="#fff" font-size="11">母线</text>`;
+    $("mt").textContent = `台区拓扑示意图 - 第 ${r.i} 点`;
+    $("mm1").textContent = `采样时间: ${r.t}`;
+    $("mm2").textContent = `过载占比: ${F(r.or, 1)}%`;
+    $("mm3").textContent = `越限占比: ${F(r.vr, 1)}%`;
+    $("mm4").textContent = `风险等级: ${lv > 1.3 ? "高" : (lv > 0.95 ? "中" : "低")}`;
+    $("m").classList.add("on");
+  }
+
+  $("tb").onclick = (e) => {
+    const b = e.target.closest("button[data-i]");
+    if (b) openTopologyModal(Number(b.dataset.i));
+  };
+  $("mx").onclick = () => $("m").classList.remove("on");
+  $("m").onclick = (e) => {
+    if (e.target.id === "m") $("m").classList.remove("on");
+  };
+
+  $("c2").onclick = runGridAnalysis;
+  $("r2").onclick = () => {
+    $("sn").value = 8;
+    $("ow").value = 12;
+    $("od").value = 22;
+    $("vw").value = 10;
+    runGridAnalysis();
+  };
+
+  calcTransformer();
+  runGridAnalysis();
+  const activeTabBtn = document.querySelector(".tabs button.on");
+  if (activeTabBtn && activeTabBtn.dataset.t === "t3") ensureTopologyModule();
+  if (activeTabBtn && activeTabBtn.dataset.t === "t4") initQcModule();
+  </script>
+</body>
+</html>
