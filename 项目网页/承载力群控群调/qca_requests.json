@@ -1,0 +1,4292 @@
+[
+  {
+    "id": "GA-1775643476665-ji2x",
+    "areaId": "029000646698",
+    "areaName": "10kV悦和公用台变",
+    "createdAtMs": 1775643476665,
+    "createdAtText": "2026/4/8 18:17:56",
+    "status": "confirmed",
+    "report": {
+      "risk": "低",
+      "summary": "台区群控负荷波动可控，响应曲线稳定，越限风险较低。",
+      "advice": "建议保持当前策略，重点关注极端天气与节假日时段。",
+      "strategyName": "策略1",
+      "recommendedId": "s1",
+      "metrics": [
+        {
+          "label": "推荐策略",
+          "value": "策略1"
+        },
+        {
+          "label": "响应参与率",
+          "value": "70%"
+        },
+        {
+          "label": "预计削峰",
+          "value": "8%"
+        },
+        {
+          "label": "越限风险占比",
+          "value": "4%"
+        },
+        {
+          "label": "策略稳定性",
+          "value": "0.78"
+        }
+      ],
+      "strategies": {
+        "s1": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "24 kW",
+            "ratioText": "39%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "54 kW",
+            "ratioText": "34%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s2": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "36 kW",
+            "ratioText": "48%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "30 kW",
+            "ratioText": "42%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "60 kW",
+            "ratioText": "37%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "20 kW",
+            "ratioText": "28%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s3": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "28 kW",
+            "ratioText": "36%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "18 kW",
+            "ratioText": "22%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "26 kW",
+            "ratioText": "33%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "40 kW",
+            "ratioText": "29%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "15 kW",
+            "ratioText": "20%"
+          }
+        ]
+      },
+      "evalRows": [
+        {
+          "idx": 1,
+          "timeText": "2024-03-15 10:00",
+          "olBefore": 12,
+          "olAfter": 0,
+          "olRateBefore": 14.5,
+          "olRateAfter": 0,
+          "vuBefore": 18,
+          "vuAfter": 0,
+          "vrBefore": 12.3,
+          "vrAfter": 0
+        },
+        {
+          "idx": 2,
+          "timeText": "2024-03-15 11:00",
+          "olBefore": 16,
+          "olAfter": 0,
+          "olRateBefore": 18.2,
+          "olRateAfter": 0,
+          "vuBefore": 21,
+          "vuAfter": 0,
+          "vrBefore": 14.6,
+          "vrAfter": 0
+        },
+        {
+          "idx": 3,
+          "timeText": "2024-03-15 12:00",
+          "olBefore": 20,
+          "olAfter": 0,
+          "olRateBefore": 21.8,
+          "olRateAfter": 0,
+          "vuBefore": 26,
+          "vuAfter": 0,
+          "vrBefore": 16.9,
+          "vrAfter": 0
+        },
+        {
+          "idx": 4,
+          "timeText": "2024-03-15 13:00",
+          "olBefore": 15,
+          "olAfter": 0,
+          "olRateBefore": 17.1,
+          "olRateAfter": 0,
+          "vuBefore": 19,
+          "vuAfter": 0,
+          "vrBefore": 13.4,
+          "vrAfter": 0
+        },
+        {
+          "idx": 5,
+          "timeText": "2024-03-15 14:00",
+          "olBefore": 13,
+          "olAfter": 0,
+          "olRateBefore": 15.6,
+          "olRateAfter": 0,
+          "vuBefore": 17,
+          "vuAfter": 0,
+          "vrBefore": 11.2,
+          "vrAfter": 0
+        },
+        {
+          "idx": 6,
+          "timeText": "2024-03-15 15:00",
+          "olBefore": 11,
+          "olAfter": 0,
+          "olRateBefore": 13.2,
+          "olRateAfter": 0,
+          "vuBefore": 15,
+          "vuAfter": 0,
+          "vrBefore": 9.8,
+          "vrAfter": 0
+        }
+      ],
+      "reportedAtMs": 1775643489597,
+      "reportedAtText": "2026/4/8 18:18:09"
+    },
+    "attachments": [
+      {
+        "idx": 0,
+        "label": "单台配变电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 1,
+        "label": "单台配变有功无功",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 2,
+        "label": "低压用户电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 3,
+        "label": "台区拓扑关系",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      }
+    ],
+    "attachmentsBatchId": "",
+    "attachmentsAtText": "",
+    "reportedAtMs": 1775643489597,
+    "reportedAtText": "2026/4/8 18:18:09",
+    "confirmRequestedAtMs": 1775643489597,
+    "confirmRequestedAtText": "2026/4/8 18:18:09",
+    "confirmedStrategyId": "s3",
+    "confirmedAtMs": 1775643507220,
+    "confirmedAtText": "2026/4/8 18:18:27",
+    "ownerNotifyStatus": "sent",
+    "ownerNotifyAtMs": 1775643513715,
+    "ownerNotifyAtText": "2026/4/8 18:18:33",
+    "dispatchStatus": "DONE",
+    "dispatchAtMs": 1775643529916,
+    "dispatchAtText": "2026/4/8 18:18:49",
+    "dispatchPlanId": "PLAN-20260408-181849-632",
+    "dispatchStrategyId": "s3",
+    "dispatchResultText": "按策略3调度，命中 0 座",
+    "dispatchTargetCount": 0,
+    "dispatchPayload": {
+      "plan_id": "PLAN-20260408-181849-632",
+      "cmd_id": "GA-1775643476665-ji2x",
+      "type": "SET_ACTIVE_POWER_LIMIT",
+      "plan_type": "群控群调调度",
+      "area_id": "029000646698",
+      "target_station_ids": [],
+      "value": "",
+      "unit": "%Pn",
+      "strategy": {
+        "id": "s3",
+        "name": "策略3"
+      },
+      "target_detail": [],
+      "dispatched_at": "2026/4/8 18:18:49"
+    }
+  },
+  {
+    "id": "GA-1775642945134-0hts",
+    "areaId": "029000646698",
+    "areaName": "10kV悦和公用台变",
+    "createdAtMs": 1775642945134,
+    "createdAtText": "2026/4/8 18:09:05",
+    "status": "confirmed",
+    "report": {
+      "risk": "低",
+      "summary": "台区群控负荷波动可控，响应曲线稳定，越限风险较低。",
+      "advice": "建议保持当前策略，重点关注极端天气与节假日时段。",
+      "strategyName": "策略1",
+      "recommendedId": "s1",
+      "metrics": [
+        {
+          "label": "推荐策略",
+          "value": "策略1"
+        },
+        {
+          "label": "响应参与率",
+          "value": "70%"
+        },
+        {
+          "label": "预计削峰",
+          "value": "8%"
+        },
+        {
+          "label": "越限风险占比",
+          "value": "4%"
+        },
+        {
+          "label": "策略稳定性",
+          "value": "0.78"
+        }
+      ],
+      "strategies": {
+        "s1": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "24 kW",
+            "ratioText": "39%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "54 kW",
+            "ratioText": "34%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s2": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "36 kW",
+            "ratioText": "48%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "30 kW",
+            "ratioText": "42%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "60 kW",
+            "ratioText": "37%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "20 kW",
+            "ratioText": "28%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s3": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "28 kW",
+            "ratioText": "36%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "18 kW",
+            "ratioText": "22%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "26 kW",
+            "ratioText": "33%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "40 kW",
+            "ratioText": "29%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "15 kW",
+            "ratioText": "20%"
+          }
+        ]
+      },
+      "evalRows": [
+        {
+          "idx": 1,
+          "timeText": "2024-03-15 10:00",
+          "olBefore": 12,
+          "olAfter": 0,
+          "olRateBefore": 14.5,
+          "olRateAfter": 0,
+          "vuBefore": 18,
+          "vuAfter": 0,
+          "vrBefore": 12.3,
+          "vrAfter": 0
+        },
+        {
+          "idx": 2,
+          "timeText": "2024-03-15 11:00",
+          "olBefore": 16,
+          "olAfter": 0,
+          "olRateBefore": 18.2,
+          "olRateAfter": 0,
+          "vuBefore": 21,
+          "vuAfter": 0,
+          "vrBefore": 14.6,
+          "vrAfter": 0
+        },
+        {
+          "idx": 3,
+          "timeText": "2024-03-15 12:00",
+          "olBefore": 20,
+          "olAfter": 0,
+          "olRateBefore": 21.8,
+          "olRateAfter": 0,
+          "vuBefore": 26,
+          "vuAfter": 0,
+          "vrBefore": 16.9,
+          "vrAfter": 0
+        },
+        {
+          "idx": 4,
+          "timeText": "2024-03-15 13:00",
+          "olBefore": 15,
+          "olAfter": 0,
+          "olRateBefore": 17.1,
+          "olRateAfter": 0,
+          "vuBefore": 19,
+          "vuAfter": 0,
+          "vrBefore": 13.4,
+          "vrAfter": 0
+        },
+        {
+          "idx": 5,
+          "timeText": "2024-03-15 14:00",
+          "olBefore": 13,
+          "olAfter": 0,
+          "olRateBefore": 15.6,
+          "olRateAfter": 0,
+          "vuBefore": 17,
+          "vuAfter": 0,
+          "vrBefore": 11.2,
+          "vrAfter": 0
+        },
+        {
+          "idx": 6,
+          "timeText": "2024-03-15 15:00",
+          "olBefore": 11,
+          "olAfter": 0,
+          "olRateBefore": 13.2,
+          "olRateAfter": 0,
+          "vuBefore": 15,
+          "vuAfter": 0,
+          "vrBefore": 9.8,
+          "vrAfter": 0
+        }
+      ],
+      "reportedAtMs": 1775642958383,
+      "reportedAtText": "2026/4/8 18:09:18"
+    },
+    "attachments": [
+      {
+        "idx": 0,
+        "label": "单台配变电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 1,
+        "label": "单台配变有功无功",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 2,
+        "label": "低压用户电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 3,
+        "label": "台区拓扑关系",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      }
+    ],
+    "attachmentsBatchId": "",
+    "attachmentsAtText": "",
+    "reportedAtMs": 1775642958383,
+    "reportedAtText": "2026/4/8 18:09:18",
+    "confirmRequestedAtMs": 1775642958384,
+    "confirmRequestedAtText": "2026/4/8 18:09:18",
+    "confirmedStrategyId": "s3",
+    "confirmedAtMs": 1775642985504,
+    "confirmedAtText": "2026/4/8 18:09:45"
+  },
+  {
+    "id": "GA-1775638699060-mk70",
+    "areaId": "029000646698",
+    "areaName": "10kV悦和公用台变",
+    "createdAtMs": 1775638699060,
+    "createdAtText": "2026/4/8 16:58:19",
+    "status": "reported",
+    "report": {
+      "risk": "低",
+      "summary": "台区群控负荷波动可控，响应曲线稳定，越限风险较低。",
+      "advice": "建议保持当前策略，重点关注极端天气与节假日时段。",
+      "strategyName": "策略1",
+      "recommendedId": "s1",
+      "metrics": [
+        {
+          "label": "推荐策略",
+          "value": "策略1"
+        },
+        {
+          "label": "响应参与率",
+          "value": "70%"
+        },
+        {
+          "label": "预计削峰",
+          "value": "8%"
+        },
+        {
+          "label": "越限风险占比",
+          "value": "4%"
+        },
+        {
+          "label": "策略稳定性",
+          "value": "0.78"
+        }
+      ],
+      "strategies": {
+        "s1": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "24 kW",
+            "ratioText": "39%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "54 kW",
+            "ratioText": "34%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s2": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "36 kW",
+            "ratioText": "48%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "30 kW",
+            "ratioText": "42%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "60 kW",
+            "ratioText": "37%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "20 kW",
+            "ratioText": "28%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s3": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "28 kW",
+            "ratioText": "36%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "18 kW",
+            "ratioText": "22%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "26 kW",
+            "ratioText": "33%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "40 kW",
+            "ratioText": "29%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "15 kW",
+            "ratioText": "20%"
+          }
+        ]
+      },
+      "evalRows": [
+        {
+          "idx": 1,
+          "timeText": "2024-03-15 10:00",
+          "olBefore": 12,
+          "olAfter": 0,
+          "olRateBefore": 14.5,
+          "olRateAfter": 0,
+          "vuBefore": 18,
+          "vuAfter": 0,
+          "vrBefore": 12.3,
+          "vrAfter": 0
+        },
+        {
+          "idx": 2,
+          "timeText": "2024-03-15 11:00",
+          "olBefore": 16,
+          "olAfter": 0,
+          "olRateBefore": 18.2,
+          "olRateAfter": 0,
+          "vuBefore": 21,
+          "vuAfter": 0,
+          "vrBefore": 14.6,
+          "vrAfter": 0
+        },
+        {
+          "idx": 3,
+          "timeText": "2024-03-15 12:00",
+          "olBefore": 20,
+          "olAfter": 0,
+          "olRateBefore": 21.8,
+          "olRateAfter": 0,
+          "vuBefore": 26,
+          "vuAfter": 0,
+          "vrBefore": 16.9,
+          "vrAfter": 0
+        },
+        {
+          "idx": 4,
+          "timeText": "2024-03-15 13:00",
+          "olBefore": 15,
+          "olAfter": 0,
+          "olRateBefore": 17.1,
+          "olRateAfter": 0,
+          "vuBefore": 19,
+          "vuAfter": 0,
+          "vrBefore": 13.4,
+          "vrAfter": 0
+        },
+        {
+          "idx": 5,
+          "timeText": "2024-03-15 14:00",
+          "olBefore": 13,
+          "olAfter": 0,
+          "olRateBefore": 15.6,
+          "olRateAfter": 0,
+          "vuBefore": 17,
+          "vuAfter": 0,
+          "vrBefore": 11.2,
+          "vrAfter": 0
+        },
+        {
+          "idx": 6,
+          "timeText": "2024-03-15 15:00",
+          "olBefore": 11,
+          "olAfter": 0,
+          "olRateBefore": 13.2,
+          "olRateAfter": 0,
+          "vuBefore": 15,
+          "vuAfter": 0,
+          "vrBefore": 9.8,
+          "vrAfter": 0
+        }
+      ],
+      "reportedAtMs": 1775638714744,
+      "reportedAtText": "2026/4/8 16:58:34"
+    },
+    "attachments": [
+      {
+        "idx": 0,
+        "label": "单台配变电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 1,
+        "label": "单台配变有功无功",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 2,
+        "label": "低压用户电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 3,
+        "label": "台区拓扑关系",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      }
+    ],
+    "attachmentsBatchId": "",
+    "attachmentsAtText": "",
+    "reportedAtMs": 1775638714744,
+    "reportedAtText": "2026/4/8 16:58:34",
+    "confirmRequestedAtMs": 1775638714744,
+    "confirmRequestedAtText": "2026/4/8 16:58:34"
+  },
+  {
+    "id": "GA-1775638627148-b9r2",
+    "areaId": "029000646698",
+    "areaName": "10kV悦和公用台变",
+    "createdAtMs": 1775638627148,
+    "createdAtText": "2026/4/8 16:57:07",
+    "status": "confirmed",
+    "report": {
+      "risk": "低",
+      "summary": "台区群控负荷波动可控，响应曲线稳定，越限风险较低。",
+      "advice": "建议保持当前策略，重点关注极端天气与节假日时段。",
+      "strategyName": "策略1",
+      "recommendedId": "s1",
+      "metrics": [
+        {
+          "label": "推荐策略",
+          "value": "策略1"
+        },
+        {
+          "label": "响应参与率",
+          "value": "70%"
+        },
+        {
+          "label": "预计削峰",
+          "value": "8%"
+        },
+        {
+          "label": "越限风险占比",
+          "value": "4%"
+        },
+        {
+          "label": "策略稳定性",
+          "value": "0.78"
+        }
+      ],
+      "strategies": {
+        "s1": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "24 kW",
+            "ratioText": "39%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "54 kW",
+            "ratioText": "34%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s2": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "36 kW",
+            "ratioText": "48%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "30 kW",
+            "ratioText": "42%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "60 kW",
+            "ratioText": "37%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "20 kW",
+            "ratioText": "28%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s3": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "28 kW",
+            "ratioText": "36%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "18 kW",
+            "ratioText": "22%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "26 kW",
+            "ratioText": "33%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "40 kW",
+            "ratioText": "29%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "15 kW",
+            "ratioText": "20%"
+          }
+        ]
+      },
+      "evalRows": [
+        {
+          "idx": 1,
+          "timeText": "2024-03-15 10:00",
+          "olBefore": 12,
+          "olAfter": 0,
+          "olRateBefore": 14.5,
+          "olRateAfter": 0,
+          "vuBefore": 18,
+          "vuAfter": 0,
+          "vrBefore": 12.3,
+          "vrAfter": 0
+        },
+        {
+          "idx": 2,
+          "timeText": "2024-03-15 11:00",
+          "olBefore": 16,
+          "olAfter": 0,
+          "olRateBefore": 18.2,
+          "olRateAfter": 0,
+          "vuBefore": 21,
+          "vuAfter": 0,
+          "vrBefore": 14.6,
+          "vrAfter": 0
+        },
+        {
+          "idx": 3,
+          "timeText": "2024-03-15 12:00",
+          "olBefore": 20,
+          "olAfter": 0,
+          "olRateBefore": 21.8,
+          "olRateAfter": 0,
+          "vuBefore": 26,
+          "vuAfter": 0,
+          "vrBefore": 16.9,
+          "vrAfter": 0
+        },
+        {
+          "idx": 4,
+          "timeText": "2024-03-15 13:00",
+          "olBefore": 15,
+          "olAfter": 0,
+          "olRateBefore": 17.1,
+          "olRateAfter": 0,
+          "vuBefore": 19,
+          "vuAfter": 0,
+          "vrBefore": 13.4,
+          "vrAfter": 0
+        },
+        {
+          "idx": 5,
+          "timeText": "2024-03-15 14:00",
+          "olBefore": 13,
+          "olAfter": 0,
+          "olRateBefore": 15.6,
+          "olRateAfter": 0,
+          "vuBefore": 17,
+          "vuAfter": 0,
+          "vrBefore": 11.2,
+          "vrAfter": 0
+        },
+        {
+          "idx": 6,
+          "timeText": "2024-03-15 15:00",
+          "olBefore": 11,
+          "olAfter": 0,
+          "olRateBefore": 13.2,
+          "olRateAfter": 0,
+          "vuBefore": 15,
+          "vuAfter": 0,
+          "vrBefore": 9.8,
+          "vrAfter": 0
+        }
+      ],
+      "reportedAtMs": 1775638639044,
+      "reportedAtText": "2026/4/8 16:57:19"
+    },
+    "attachments": [
+      {
+        "idx": 0,
+        "label": "单台配变电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 1,
+        "label": "单台配变有功无功",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 2,
+        "label": "低压用户电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 3,
+        "label": "台区拓扑关系",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      }
+    ],
+    "attachmentsBatchId": "",
+    "attachmentsAtText": "",
+    "reportedAtMs": 1775638639044,
+    "reportedAtText": "2026/4/8 16:57:19",
+    "confirmRequestedAtMs": 1775638639045,
+    "confirmRequestedAtText": "2026/4/8 16:57:19",
+    "confirmedStrategyId": "s3",
+    "confirmedAtMs": 1775638671619,
+    "confirmedAtText": "2026/4/8 16:57:51"
+  },
+  {
+    "id": "GA-1775636831339-vb44",
+    "areaId": "029000646698",
+    "areaName": "10kV悦和公用台变",
+    "createdAtMs": 1775636831339,
+    "createdAtText": "2026/4/8 16:27:11",
+    "status": "reported",
+    "report": {
+      "risk": "低",
+      "summary": "台区群控负荷波动可控，响应曲线稳定，越限风险较低。",
+      "advice": "建议保持当前策略，重点关注极端天气与节假日时段。",
+      "strategyName": "策略1",
+      "recommendedId": "s1",
+      "metrics": [
+        {
+          "label": "推荐策略",
+          "value": "策略1"
+        },
+        {
+          "label": "响应参与率",
+          "value": "70%"
+        },
+        {
+          "label": "预计削峰",
+          "value": "8%"
+        },
+        {
+          "label": "越限风险占比",
+          "value": "4%"
+        },
+        {
+          "label": "策略稳定性",
+          "value": "0.78"
+        }
+      ],
+      "strategies": {
+        "s1": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "24 kW",
+            "ratioText": "39%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "54 kW",
+            "ratioText": "34%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s2": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "36 kW",
+            "ratioText": "48%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "30 kW",
+            "ratioText": "42%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "60 kW",
+            "ratioText": "37%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "20 kW",
+            "ratioText": "28%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s3": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "28 kW",
+            "ratioText": "36%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "18 kW",
+            "ratioText": "22%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "26 kW",
+            "ratioText": "33%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "40 kW",
+            "ratioText": "29%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "15 kW",
+            "ratioText": "20%"
+          }
+        ]
+      },
+      "evalRows": [
+        {
+          "idx": 1,
+          "timeText": "2024-03-15 10:00",
+          "olBefore": 12,
+          "olAfter": 0,
+          "olRateBefore": 14.5,
+          "olRateAfter": 0,
+          "vuBefore": 18,
+          "vuAfter": 0,
+          "vrBefore": 12.3,
+          "vrAfter": 0
+        },
+        {
+          "idx": 2,
+          "timeText": "2024-03-15 11:00",
+          "olBefore": 16,
+          "olAfter": 0,
+          "olRateBefore": 18.2,
+          "olRateAfter": 0,
+          "vuBefore": 21,
+          "vuAfter": 0,
+          "vrBefore": 14.6,
+          "vrAfter": 0
+        },
+        {
+          "idx": 3,
+          "timeText": "2024-03-15 12:00",
+          "olBefore": 20,
+          "olAfter": 0,
+          "olRateBefore": 21.8,
+          "olRateAfter": 0,
+          "vuBefore": 26,
+          "vuAfter": 0,
+          "vrBefore": 16.9,
+          "vrAfter": 0
+        },
+        {
+          "idx": 4,
+          "timeText": "2024-03-15 13:00",
+          "olBefore": 15,
+          "olAfter": 0,
+          "olRateBefore": 17.1,
+          "olRateAfter": 0,
+          "vuBefore": 19,
+          "vuAfter": 0,
+          "vrBefore": 13.4,
+          "vrAfter": 0
+        },
+        {
+          "idx": 5,
+          "timeText": "2024-03-15 14:00",
+          "olBefore": 13,
+          "olAfter": 0,
+          "olRateBefore": 15.6,
+          "olRateAfter": 0,
+          "vuBefore": 17,
+          "vuAfter": 0,
+          "vrBefore": 11.2,
+          "vrAfter": 0
+        },
+        {
+          "idx": 6,
+          "timeText": "2024-03-15 15:00",
+          "olBefore": 11,
+          "olAfter": 0,
+          "olRateBefore": 13.2,
+          "olRateAfter": 0,
+          "vuBefore": 15,
+          "vuAfter": 0,
+          "vrBefore": 9.8,
+          "vrAfter": 0
+        }
+      ],
+      "reportedAtMs": 1775636838456,
+      "reportedAtText": "2026/4/8 16:27:18"
+    },
+    "attachments": [
+      {
+        "idx": 0,
+        "label": "单台配变电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 1,
+        "label": "单台配变有功无功",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 2,
+        "label": "低压用户电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 3,
+        "label": "台区拓扑关系",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      }
+    ],
+    "attachmentsBatchId": "",
+    "attachmentsAtText": "",
+    "reportedAtMs": 1775636838456,
+    "reportedAtText": "2026/4/8 16:27:18",
+    "confirmRequestedAtMs": 1775636838456,
+    "confirmRequestedAtText": "2026/4/8 16:27:18"
+  },
+  {
+    "id": "GA-1775634312808-ih39",
+    "areaId": "029000646698",
+    "areaName": "10kV悦和公用台变",
+    "createdAtMs": 1775634312808,
+    "createdAtText": "2026/4/8 15:45:12",
+    "status": "confirmed",
+    "report": {
+      "risk": "低",
+      "summary": "台区群控负荷波动可控，响应曲线稳定，越限风险较低。",
+      "advice": "建议保持当前策略，重点关注极端天气与节假日时段。",
+      "strategyName": "策略1",
+      "recommendedId": "s1",
+      "metrics": [
+        {
+          "label": "推荐策略",
+          "value": "策略1"
+        },
+        {
+          "label": "响应参与率",
+          "value": "70%"
+        },
+        {
+          "label": "预计削峰",
+          "value": "8%"
+        },
+        {
+          "label": "越限风险占比",
+          "value": "4%"
+        },
+        {
+          "label": "策略稳定性",
+          "value": "0.78"
+        }
+      ],
+      "strategies": {
+        "s1": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "24 kW",
+            "ratioText": "39%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "54 kW",
+            "ratioText": "34%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s2": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "36 kW",
+            "ratioText": "48%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "30 kW",
+            "ratioText": "42%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "60 kW",
+            "ratioText": "37%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "20 kW",
+            "ratioText": "28%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s3": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "28 kW",
+            "ratioText": "36%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "18 kW",
+            "ratioText": "22%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "26 kW",
+            "ratioText": "33%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "40 kW",
+            "ratioText": "29%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "15 kW",
+            "ratioText": "20%"
+          }
+        ]
+      },
+      "evalRows": [
+        {
+          "idx": 1,
+          "timeText": "2024-03-15 10:00",
+          "olBefore": 12,
+          "olAfter": 0,
+          "olRateBefore": 14.5,
+          "olRateAfter": 0,
+          "vuBefore": 18,
+          "vuAfter": 0,
+          "vrBefore": 12.3,
+          "vrAfter": 0
+        },
+        {
+          "idx": 2,
+          "timeText": "2024-03-15 11:00",
+          "olBefore": 16,
+          "olAfter": 0,
+          "olRateBefore": 18.2,
+          "olRateAfter": 0,
+          "vuBefore": 21,
+          "vuAfter": 0,
+          "vrBefore": 14.6,
+          "vrAfter": 0
+        },
+        {
+          "idx": 3,
+          "timeText": "2024-03-15 12:00",
+          "olBefore": 20,
+          "olAfter": 0,
+          "olRateBefore": 21.8,
+          "olRateAfter": 0,
+          "vuBefore": 26,
+          "vuAfter": 0,
+          "vrBefore": 16.9,
+          "vrAfter": 0
+        },
+        {
+          "idx": 4,
+          "timeText": "2024-03-15 13:00",
+          "olBefore": 15,
+          "olAfter": 0,
+          "olRateBefore": 17.1,
+          "olRateAfter": 0,
+          "vuBefore": 19,
+          "vuAfter": 0,
+          "vrBefore": 13.4,
+          "vrAfter": 0
+        },
+        {
+          "idx": 5,
+          "timeText": "2024-03-15 14:00",
+          "olBefore": 13,
+          "olAfter": 0,
+          "olRateBefore": 15.6,
+          "olRateAfter": 0,
+          "vuBefore": 17,
+          "vuAfter": 0,
+          "vrBefore": 11.2,
+          "vrAfter": 0
+        },
+        {
+          "idx": 6,
+          "timeText": "2024-03-15 15:00",
+          "olBefore": 11,
+          "olAfter": 0,
+          "olRateBefore": 13.2,
+          "olRateAfter": 0,
+          "vuBefore": 15,
+          "vuAfter": 0,
+          "vrBefore": 9.8,
+          "vrAfter": 0
+        }
+      ],
+      "reportedAtMs": 1775634337692,
+      "reportedAtText": "2026/4/8 15:45:37"
+    },
+    "attachments": [
+      {
+        "idx": 0,
+        "label": "单台配变电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 1,
+        "label": "单台配变有功无功",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 2,
+        "label": "低压用户电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 3,
+        "label": "台区拓扑关系",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      }
+    ],
+    "attachmentsBatchId": "",
+    "attachmentsAtText": "",
+    "reportedAtMs": 1775634337692,
+    "reportedAtText": "2026/4/8 15:45:37",
+    "confirmRequestedAtMs": 1775634337692,
+    "confirmRequestedAtText": "2026/4/8 15:45:37",
+    "confirmedStrategyId": "s2",
+    "confirmedAtMs": 1775634352846,
+    "confirmedAtText": "2026/4/8 15:45:52",
+    "dispatchStatus": "DONE",
+    "dispatchAtMs": 1775634362497,
+    "dispatchAtText": "2026/4/8 15:46:02",
+    "dispatchPlanId": "PLAN-20260408-154602-638",
+    "dispatchStrategyId": "s2",
+    "dispatchResultText": "按策略2调度，命中 0 座",
+    "dispatchTargetCount": 0,
+    "dispatchPayload": {
+      "plan_id": "PLAN-20260408-154602-638",
+      "cmd_id": "GA-1775634312808-ih39",
+      "type": "SET_ACTIVE_POWER_LIMIT",
+      "plan_type": "群控群调调度",
+      "area_id": "029000646698",
+      "target_station_ids": [],
+      "value": "",
+      "unit": "%Pn",
+      "strategy": {
+        "id": "s2",
+        "name": "策略2"
+      },
+      "target_detail": [],
+      "dispatched_at": "2026/4/8 15:46:02"
+    }
+  },
+  {
+    "id": "GA-1775632317625-syw2",
+    "areaId": "029000646698",
+    "areaName": "10kV悦和公用台变",
+    "createdAtMs": 1775632317625,
+    "createdAtText": "2026/4/8 15:11:57",
+    "status": "confirmed",
+    "report": {
+      "risk": "低",
+      "summary": "台区群控负荷波动可控，响应曲线稳定，越限风险较低。",
+      "advice": "建议保持当前策略，重点关注极端天气与节假日时段。",
+      "strategyName": "策略1",
+      "recommendedId": "s1",
+      "metrics": [
+        {
+          "label": "推荐策略",
+          "value": "策略1"
+        },
+        {
+          "label": "响应参与率",
+          "value": "70%"
+        },
+        {
+          "label": "预计削峰",
+          "value": "8%"
+        },
+        {
+          "label": "越限风险占比",
+          "value": "4%"
+        },
+        {
+          "label": "策略稳定性",
+          "value": "0.78"
+        }
+      ],
+      "strategies": {
+        "s1": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "24 kW",
+            "ratioText": "39%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "54 kW",
+            "ratioText": "34%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s2": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "36 kW",
+            "ratioText": "48%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "30 kW",
+            "ratioText": "42%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "60 kW",
+            "ratioText": "37%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "20 kW",
+            "ratioText": "28%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s3": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "28 kW",
+            "ratioText": "36%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "18 kW",
+            "ratioText": "22%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "26 kW",
+            "ratioText": "33%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "40 kW",
+            "ratioText": "29%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "15 kW",
+            "ratioText": "20%"
+          }
+        ]
+      },
+      "evalRows": [
+        {
+          "idx": 1,
+          "timeText": "2024-03-15 10:00",
+          "olBefore": 12,
+          "olAfter": 0,
+          "olRateBefore": 14.5,
+          "olRateAfter": 0,
+          "vuBefore": 18,
+          "vuAfter": 0,
+          "vrBefore": 12.3,
+          "vrAfter": 0
+        },
+        {
+          "idx": 2,
+          "timeText": "2024-03-15 11:00",
+          "olBefore": 16,
+          "olAfter": 0,
+          "olRateBefore": 18.2,
+          "olRateAfter": 0,
+          "vuBefore": 21,
+          "vuAfter": 0,
+          "vrBefore": 14.6,
+          "vrAfter": 0
+        },
+        {
+          "idx": 3,
+          "timeText": "2024-03-15 12:00",
+          "olBefore": 20,
+          "olAfter": 0,
+          "olRateBefore": 21.8,
+          "olRateAfter": 0,
+          "vuBefore": 26,
+          "vuAfter": 0,
+          "vrBefore": 16.9,
+          "vrAfter": 0
+        },
+        {
+          "idx": 4,
+          "timeText": "2024-03-15 13:00",
+          "olBefore": 15,
+          "olAfter": 0,
+          "olRateBefore": 17.1,
+          "olRateAfter": 0,
+          "vuBefore": 19,
+          "vuAfter": 0,
+          "vrBefore": 13.4,
+          "vrAfter": 0
+        },
+        {
+          "idx": 5,
+          "timeText": "2024-03-15 14:00",
+          "olBefore": 13,
+          "olAfter": 0,
+          "olRateBefore": 15.6,
+          "olRateAfter": 0,
+          "vuBefore": 17,
+          "vuAfter": 0,
+          "vrBefore": 11.2,
+          "vrAfter": 0
+        },
+        {
+          "idx": 6,
+          "timeText": "2024-03-15 15:00",
+          "olBefore": 11,
+          "olAfter": 0,
+          "olRateBefore": 13.2,
+          "olRateAfter": 0,
+          "vuBefore": 15,
+          "vuAfter": 0,
+          "vrBefore": 9.8,
+          "vrAfter": 0
+        }
+      ],
+      "reportedAtMs": 1775633991994,
+      "reportedAtText": "2026/4/8 15:39:51"
+    },
+    "attachments": [
+      {
+        "idx": 0,
+        "label": "单台配变电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 1,
+        "label": "单台配变有功无功",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 2,
+        "label": "低压用户电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 3,
+        "label": "台区拓扑关系",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      }
+    ],
+    "attachmentsBatchId": "",
+    "attachmentsAtText": "",
+    "reportedAtMs": 1775633991994,
+    "reportedAtText": "2026/4/8 15:39:51",
+    "confirmRequestedAtMs": 1775633991995,
+    "confirmRequestedAtText": "2026/4/8 15:39:51",
+    "confirmedStrategyId": "s3",
+    "confirmedAtMs": 1775634008332,
+    "confirmedAtText": "2026/4/8 15:40:08"
+  },
+  {
+    "id": "GA-1775631377049-t2u6",
+    "areaId": "029000646698",
+    "areaName": "10kV悦和公用台变",
+    "createdAtMs": 1775631377049,
+    "createdAtText": "2026/4/8 14:56:17",
+    "status": "confirmed",
+    "report": {
+      "risk": "低",
+      "summary": "台区群控负荷波动可控，响应曲线稳定，越限风险较低。",
+      "advice": "建议保持当前策略，重点关注极端天气与节假日时段。",
+      "strategyName": "策略1",
+      "recommendedId": "s1",
+      "metrics": [
+        {
+          "label": "推荐策略",
+          "value": "策略1"
+        },
+        {
+          "label": "响应参与率",
+          "value": "70%"
+        },
+        {
+          "label": "预计削峰",
+          "value": "8%"
+        },
+        {
+          "label": "越限风险占比",
+          "value": "4%"
+        },
+        {
+          "label": "策略稳定性",
+          "value": "0.78"
+        }
+      ],
+      "strategies": {
+        "s1": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "24 kW",
+            "ratioText": "39%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "54 kW",
+            "ratioText": "34%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s2": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "36 kW",
+            "ratioText": "48%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "30 kW",
+            "ratioText": "42%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "60 kW",
+            "ratioText": "37%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 14:00",
+            "powerText": "20 kW",
+            "ratioText": "28%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          }
+        ],
+        "s3": [
+          {
+            "idx": 1,
+            "assetId": "MTR4401001",
+            "userId": "USR001",
+            "userName": "张三",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 2,
+            "assetId": "MTR4401002",
+            "userId": "USR002",
+            "userName": "李四",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 3,
+            "assetId": "MTR4401003",
+            "userId": "USR003",
+            "userName": "王五",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 4,
+            "assetId": "MTR4401004",
+            "userId": "USR004",
+            "userName": "赵六",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "28 kW",
+            "ratioText": "36%"
+          },
+          {
+            "idx": 5,
+            "assetId": "MTR4401005",
+            "userId": "USR005",
+            "userName": "钱七",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 13:00",
+            "powerText": "18 kW",
+            "ratioText": "22%"
+          },
+          {
+            "idx": 6,
+            "assetId": "MTR4401006",
+            "userId": "USR006",
+            "userName": "孙八",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 7,
+            "assetId": "MTR4401007",
+            "userId": "USR007",
+            "userName": "周九",
+            "userType": "工商业",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "26 kW",
+            "ratioText": "33%"
+          },
+          {
+            "idx": 8,
+            "assetId": "MTR4401008",
+            "userId": "USR008",
+            "userName": "吴十",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 15:00",
+            "powerText": "40 kW",
+            "ratioText": "29%"
+          },
+          {
+            "idx": 9,
+            "assetId": "MTR4401009",
+            "userId": "USR009",
+            "userName": "郑十一",
+            "userType": "居民",
+            "needCtrl": "否",
+            "startText": "-",
+            "endText": "-",
+            "powerText": "0 kW",
+            "ratioText": "0%"
+          },
+          {
+            "idx": 10,
+            "assetId": "MTR4401010",
+            "userId": "USR010",
+            "userName": "王十二",
+            "userType": "居民",
+            "needCtrl": "是",
+            "startText": "2024-03-15 09:00",
+            "endText": "2024-03-15 12:00",
+            "powerText": "15 kW",
+            "ratioText": "20%"
+          }
+        ]
+      },
+      "evalRows": [
+        {
+          "idx": 1,
+          "timeText": "2024-03-15 10:00",
+          "olBefore": 12,
+          "olAfter": 0,
+          "olRateBefore": 14.5,
+          "olRateAfter": 0,
+          "vuBefore": 18,
+          "vuAfter": 0,
+          "vrBefore": 12.3,
+          "vrAfter": 0
+        },
+        {
+          "idx": 2,
+          "timeText": "2024-03-15 11:00",
+          "olBefore": 16,
+          "olAfter": 0,
+          "olRateBefore": 18.2,
+          "olRateAfter": 0,
+          "vuBefore": 21,
+          "vuAfter": 0,
+          "vrBefore": 14.6,
+          "vrAfter": 0
+        },
+        {
+          "idx": 3,
+          "timeText": "2024-03-15 12:00",
+          "olBefore": 20,
+          "olAfter": 0,
+          "olRateBefore": 21.8,
+          "olRateAfter": 0,
+          "vuBefore": 26,
+          "vuAfter": 0,
+          "vrBefore": 16.9,
+          "vrAfter": 0
+        },
+        {
+          "idx": 4,
+          "timeText": "2024-03-15 13:00",
+          "olBefore": 15,
+          "olAfter": 0,
+          "olRateBefore": 17.1,
+          "olRateAfter": 0,
+          "vuBefore": 19,
+          "vuAfter": 0,
+          "vrBefore": 13.4,
+          "vrAfter": 0
+        },
+        {
+          "idx": 5,
+          "timeText": "2024-03-15 14:00",
+          "olBefore": 13,
+          "olAfter": 0,
+          "olRateBefore": 15.6,
+          "olRateAfter": 0,
+          "vuBefore": 17,
+          "vuAfter": 0,
+          "vrBefore": 11.2,
+          "vrAfter": 0
+        },
+        {
+          "idx": 6,
+          "timeText": "2024-03-15 15:00",
+          "olBefore": 11,
+          "olAfter": 0,
+          "olRateBefore": 13.2,
+          "olRateAfter": 0,
+          "vuBefore": 15,
+          "vuAfter": 0,
+          "vrBefore": 9.8,
+          "vrAfter": 0
+        }
+      ],
+      "reportedAtMs": 1775632327808,
+      "reportedAtText": "2026/4/8 15:12:07"
+    },
+    "attachments": [
+      {
+        "idx": 0,
+        "label": "单台配变电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 1,
+        "label": "单台配变有功无功",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 2,
+        "label": "低压用户电流电压",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      },
+      {
+        "idx": 3,
+        "label": "台区拓扑关系",
+        "name": "",
+        "size": 0,
+        "type": "",
+        "lastModified": null,
+        "dataUrl": ""
+      }
+    ],
+    "attachmentsBatchId": "",
+    "attachmentsAtText": "",
+    "reportedAtMs": 1775632327808,
+    "reportedAtText": "2026/4/8 15:12:07",
+    "confirmRequestedAtMs": 1775632327820,
+    "confirmRequestedAtText": "2026/4/8 15:12:07",
+    "confirmedStrategyId": "s1",
+    "confirmedAtMs": 1775633252721,
+    "confirmedAtText": "2026/4/8 15:27:32",
+    "dispatchStatus": "DONE",
+    "dispatchAtMs": 1775633461372,
+    "dispatchAtText": "2026/4/8 15:31:01",
+    "dispatchPlanId": "PLAN-20260408-153101-584",
+    "dispatchStrategyId": "s1",
+    "dispatchResultText": "按策略1调度，命中 0 座",
+    "dispatchTargetCount": 0,
+    "dispatchPayload": {
+      "plan_id": "PLAN-20260408-153101-584",
+      "cmd_id": "GA-1775631377049-t2u6",
+      "type": "SET_ACTIVE_POWER_LIMIT",
+      "plan_type": "群控群调调度",
+      "area_id": "029000646698",
+      "target_station_ids": [],
+      "value": "",
+      "unit": "%Pn",
+      "strategy": {
+        "id": "s1",
+        "name": "策略1"
+      },
+      "target_detail": [],
+      "dispatched_at": "2026/4/8 15:31:01"
+    }
+  }
+]

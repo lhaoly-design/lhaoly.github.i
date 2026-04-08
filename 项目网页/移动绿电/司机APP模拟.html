@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>司机APP模拟</title>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --phone: #ffffff;
+      --text: #182233;
+      --muted: #68778f;
+      --primary: #1769ff;
+      --primary-soft: #eaf2ff;
+      --success: #16a34a;
+      --danger: #d23b3b;
+      --warn: #d97706;
+      --line: #e6edf7;
+      --shadow: 0 16px 40px rgba(18, 33, 69, 0.12);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 500px at 100% -10%, #dbe8ff 0%, transparent 65%),
+        radial-gradient(1200px 500px at -10% 120%, #eaf4ff 0%, transparent 65%),
+        var(--bg);
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .phone {
+      width: 100%;
+      max-width: 420px;
+      height: min(860px, 100vh - 24px);
+      background: var(--phone);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid #e8eef9;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .notch {
+      width: 148px;
+      height: 22px;
+      border-radius: 0 0 12px 12px;
+      background: #111827;
+      margin: 0 auto;
+    }
+
+    .head {
+      padding: 10px 16px 14px;
+      background: linear-gradient(160deg, #1d67ff 0%, #3d8cff 100%);
+      color: #fff;
+    }
+
+    .status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      opacity: 0.95;
+    }
+
+    .status-icons {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #ffffff;
+      opacity: 0.88;
+    }
+
+    .title {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 10px;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .title p {
+      margin: 2px 0 0;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .driver-chip {
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      border-radius: 10px;
+      padding: 6px 9px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .toolbar {
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+      display: grid;
+      gap: 10px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: #f4f7fc;
+      border-radius: 12px;
+      padding: 4px;
+    }
+
+    .tab {
+      border: none;
+      background: transparent;
+      color: #51607a;
+      font-size: 14px;
+      padding: 9px 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .tab.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: 0 1px 2px rgba(24, 34, 51, 0.08);
+      font-weight: 600;
+    }
+
+    .badge {
+      min-width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      padding: 0 5px;
+      background: #d9e7ff;
+      color: #275bc7;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      line-height: 1;
+    }
+
+    .toolbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sub-note {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .btn-refresh {
+      border: 1px solid #dbe7fc;
+      background: #fff;
+      color: #35507f;
+      border-radius: 8px;
+      padding: 6px 11px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .list {
+      flex: 1;
+      overflow: auto;
+      padding: 12px 12px 16px;
+      background: #f8fbff;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid #e8eef9;
+      padding: 12px;
+      box-shadow: 0 4px 14px rgba(17, 40, 88, 0.06);
+    }
+
+    .card + .card {
+      margin-top: 10px;
+    }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+
+    .dispatch-id {
+      font-weight: 700;
+      font-size: 14px;
+      color: #1d2b43;
+      letter-spacing: 0.2px;
+    }
+
+    .tag {
+      font-size: 12px;
+      border-radius: 999px;
+      padding: 2px 8px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .tag.pending {
+      background: #fff7e8;
+      color: #b26a00;
+      border-color: #ffe3b0;
+    }
+
+    .tag.confirmed {
+      background: #eaf8ef;
+      color: #12753d;
+      border-color: #caefd8;
+    }
+
+    .tag.rejected {
+      background: #fff1f1;
+      color: #b23636;
+      border-color: #ffd0d0;
+    }
+
+    .tag.in-transit {
+      background: #e8f2ff;
+      color: #1f5fbf;
+      border-color: #c9deff;
+    }
+
+    .tag.in-progress {
+      background: #fff5e8;
+      color: #b86a00;
+      border-color: #ffe1b5;
+    }
+
+    .tag.finished {
+      background: #e9f8ef;
+      color: #16653a;
+      border-color: #caefd8;
+    }
+
+    .tag.canceled {
+      background: #f3f4f6;
+      color: #4b5565;
+      border-color: #e2e5ea;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: 94px 1fr;
+      row-gap: 8px;
+      column-gap: 8px;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .meta dt {
+      color: #677891;
+    }
+
+    .meta dd {
+      margin: 0;
+      color: #24344e;
+      word-break: break-all;
+    }
+
+    .actions {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .actions.single {
+      grid-template-columns: 1fr;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 10px;
+      height: 36px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .btn.confirm {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn.reject {
+      background: #fef1f1;
+      color: var(--danger);
+      border: 1px solid #f8c9c9;
+    }
+
+    .btn.start {
+      background: #eaf2ff;
+      color: #185dd2;
+      border: 1px solid #cfe0ff;
+    }
+
+    .btn.complete {
+      background: #12904d;
+      color: #fff;
+    }
+
+    .btn.cancel {
+      background: #fff6f6;
+      color: #be2f2f;
+      border: 1px solid #f4cbcb;
+    }
+
+    .history-row {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #e5ebf5;
+      font-size: 12px;
+      color: #5e6d85;
+      display: grid;
+      gap: 4px;
+    }
+
+    .history-row strong {
+      color: #364966;
+    }
+
+    .empty {
+      min-height: 44%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #697a95;
+      padding: 26px;
+    }
+
+    .empty h3 {
+      margin: 0 0 6px;
+      color: #2c3c58;
+      font-size: 16px;
+    }
+
+    .empty p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .sheet {
+      position: absolute;
+      inset: 0;
+      background: rgba(9, 20, 40, 0.45);
+      display: none;
+      align-items: end;
+      z-index: 10;
+    }
+
+    .sheet.open {
+      display: flex;
+    }
+
+    .sheet-panel {
+      width: 100%;
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+      padding: 14px;
+      box-shadow: 0 -10px 32px rgba(12, 26, 53, 0.18);
+    }
+
+    .sheet-title {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #24344e;
+    }
+
+    .sheet-hint {
+      margin: 0 0 10px;
+      color: #677891;
+      font-size: 12px;
+    }
+
+    .sheet textarea {
+      width: 100%;
+      border: 1px solid #d9e4f6;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 13px;
+      resize: none;
+      outline: none;
+      min-height: 92px;
+    }
+
+    .sheet textarea:focus {
+      border-color: #89afff;
+      box-shadow: 0 0 0 3px rgba(47, 108, 246, 0.12);
+    }
+
+    .sheet-actions {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn.ghost {
+      border: 1px solid #d7e2f3;
+      background: #fff;
+      color: #4a5f7f;
+    }
+
+    .btn.danger {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .toast {
+      position: absolute;
+      left: 50%;
+      bottom: 26px;
+      transform: translate(-50%, 16px);
+      background: rgba(18, 33, 69, 0.92);
+      color: #fff;
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      opacity: 0;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      z-index: 12;
+      max-width: calc(100% - 34px);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 420px) {
+      body {
+        padding: 0;
+      }
+
+      .phone {
+        height: 100vh;
+        max-width: none;
+        border-radius: 0;
+        border: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="phone">
+    <div class="notch" aria-hidden="true"></div>
+    <header class="head">
+      <div class="status">
+        <span id="clock">--:--</span>
+        <div class="status-icons">
+          <span>4G</span>
+          <span class="dot"></span>
+          <span>93%</span>
+        </div>
+      </div>
+      <div class="title">
+        <div>
+          <h1>司机调度中心</h1>
+          <p>调度确认后进入订单流转，拒绝会回写为调度失败</p>
+        </div>
+        <div class="driver-chip">司机端 H5</div>
+      </div>
+    </header>
+
+    <section class="toolbar">
+      <div class="tabs">
+        <button class="tab active" data-tab="pending" type="button">待接调度 <span class="badge" id="pendingCount">0</span></button>
+        <button class="tab" data-tab="orders" type="button">订单 <span class="badge" id="orderCount">0</span></button>
+      </div>
+      <div class="toolbar-row">
+        <span class="sub-note" id="subNote">只显示司机待接收确认的调度单</span>
+        <button class="btn-refresh" id="refreshBtn" type="button">刷新</button>
+      </div>
+    </section>
+
+    <section class="list" id="dispatchList"></section>
+
+    <div class="sheet" id="rejectSheet">
+      <div class="sheet-panel">
+        <h2 class="sheet-title">拒绝接单</h2>
+        <p class="sheet-hint" id="rejectTarget">调度单：--</p>
+        <textarea id="rejectReason" placeholder="请输入拒绝原因，例如：车辆电量不足 / 距离过远 / 现场条件不满足"></textarea>
+        <div class="sheet-actions">
+          <button class="btn ghost" id="cancelRejectBtn" type="button">取消</button>
+          <button class="btn danger" id="confirmRejectBtn" type="button">确认拒绝</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet" id="cancelOrderSheet">
+      <div class="sheet-panel">
+        <h2 class="sheet-title">取消订单</h2>
+        <p class="sheet-hint" id="cancelOrderTarget">调度单：--</p>
+        <textarea id="cancelOrderReason" placeholder="请输入取消原因，例如：道路受阻 / 车辆故障 / 客户现场条件变化"></textarea>
+        <div class="sheet-actions">
+          <button class="btn ghost" id="cancelOrderBackBtn" type="button">返回</button>
+          <button class="btn danger" id="confirmCancelOrderBtn" type="button">确认取消</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+  </main>
+
+  <script>
+    (() => {
+      const DISPATCH_STORAGE_KEY = 'mobile-dispatch-catalog';
+      const APP_ACK_STATUS = Object.freeze({
+        PENDING: 'pending',
+        CONFIRMED: 'confirmed',
+        REJECTED: 'rejected'
+      });
+      const DISPATCH_STATUS = Object.freeze({
+        IN_PROGRESS: '调度中',
+        FAILED: '调度失败',
+        COMPLETED: '调度完成',
+        CANCELED: '已取消'
+      });
+      const ORDER_LIFECYCLE_STATUS = Object.freeze({
+        IN_TRANSIT: '在途',
+        IN_PROGRESS: '进行中',
+        FINISHED: '完成',
+        CANCELED: '已取消'
+      });
+      const ORDER_LIFECYCLE_STATUS_SET = new Set(Object.values(ORDER_LIFECYCLE_STATUS));
+
+      const listNode = document.getElementById('dispatchList');
+      const pendingCountNode = document.getElementById('pendingCount');
+      const orderCountNode = document.getElementById('orderCount');
+      const subNoteNode = document.getElementById('subNote');
+      const clockNode = document.getElementById('clock');
+      const refreshBtn = document.getElementById('refreshBtn');
+      const toastNode = document.getElementById('toast');
+      const rejectSheet = document.getElementById('rejectSheet');
+      const rejectTargetNode = document.getElementById('rejectTarget');
+      const rejectReasonInput = document.getElementById('rejectReason');
+      const cancelRejectBtn = document.getElementById('cancelRejectBtn');
+      const confirmRejectBtn = document.getElementById('confirmRejectBtn');
+      const cancelOrderSheet = document.getElementById('cancelOrderSheet');
+      const cancelOrderTargetNode = document.getElementById('cancelOrderTarget');
+      const cancelOrderReasonInput = document.getElementById('cancelOrderReason');
+      const cancelOrderBackBtn = document.getElementById('cancelOrderBackBtn');
+      const confirmCancelOrderBtn = document.getElementById('confirmCancelOrderBtn');
+      const tabs = Array.from(document.querySelectorAll('[data-tab]'));
+
+      let activeTab = 'pending';
+      let pendingRejectDispatchId = '';
+      let pendingCancelOrderDispatchId = '';
+      let toastTimer = null;
+
+      const trim = (value) => (value == null ? '' : String(value).trim());
+      const parseArray = (value) => {
+        if (Array.isArray(value)) return value;
+        const text = trim(value);
+        if (!text) return [];
+        try {
+          const parsed = JSON.parse(text);
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+          return [];
+        }
+      };
+      const normalizeAckStatus = (value) => {
+        const text = trim(value).toLowerCase();
+        if (text === APP_ACK_STATUS.CONFIRMED || text === 'acknowledged' || text === 'success') return APP_ACK_STATUS.CONFIRMED;
+        if (text === APP_ACK_STATUS.REJECTED || text === 'failed' || text === 'error') return APP_ACK_STATUS.REJECTED;
+        return APP_ACK_STATUS.PENDING;
+      };
+      const normalizeOrderLifecycleStatus = (value, fallback = '') => {
+        const text = trim(value);
+        if (ORDER_LIFECYCLE_STATUS_SET.has(text)) return text;
+        return trim(fallback);
+      };
+      const parseDateTimeToTimestamp = (value) => {
+        const text = trim(value);
+        if (!text) return 0;
+        const normalized = text
+          .replace(/\./g, '-')
+          .replace('T', ' ')
+          .replace(/\//g, '-')
+          .replace(/-/g, '/');
+        const date = new Date(normalized);
+        const timestamp = date.getTime();
+        return Number.isFinite(timestamp) ? timestamp : 0;
+      };
+      const formatDateTime = (date = new Date()) => {
+        const pad = (num) => String(num).padStart(2, '0');
+        return [
+          date.getFullYear(),
+          '-',
+          pad(date.getMonth() + 1),
+          '-',
+          pad(date.getDate()),
+          ' ',
+          pad(date.getHours()),
+          ':',
+          pad(date.getMinutes()),
+          ':',
+          pad(date.getSeconds())
+        ].join('');
+      };
+      const normalizeDispatchRecord = (raw = {}) => {
+        const source = raw && typeof raw === 'object' ? raw : {};
+        const failureRecords = parseArray(source.failureRecords)
+          .map((item) => {
+            const at = trim(item && (item.at || item.time || item.failureAt));
+            const reason = trim(item && (item.reason || item.message || item.failureReason));
+            if (!reason) return null;
+            return { at, reason };
+          })
+          .filter(Boolean);
+        const latestFailure = failureRecords.length ? failureRecords[failureRecords.length - 1] : null;
+        const ackPayload = source.appAckPayload && typeof source.appAckPayload === 'object'
+          ? { ...source.appAckPayload }
+          : trim(source.appAckPayload);
+        return {
+          ...source,
+          dispatchId: trim(source.dispatchId),
+          workorderId: trim(source.workorderId),
+          companyName: trim(source.companyName) || '未填写',
+          orderType: trim(source.orderType) || '供电',
+          address: trim(source.address) || '—',
+          createdAt: trim(source.createdAt) || '',
+          startTime: trim(source.startTime) || '',
+          vehicleId: trim(source.vehicleId) || '未指定',
+          driverName: trim(source.driverName) || '',
+          driverPhone: trim(source.driverPhone) || '',
+          status: trim(source.status) || DISPATCH_STATUS.IN_PROGRESS,
+          appAckStatus: normalizeAckStatus(source.appAckStatus),
+          appAckAt: trim(source.appAckAt),
+          appAckPayload: ackPayload,
+          failureRecords,
+          failureReason: trim(source.failureReason) || (latestFailure ? latestFailure.reason : ''),
+          failureAt: trim(source.failureAt) || (latestFailure ? latestFailure.at : ''),
+          orderStatus: normalizeOrderLifecycleStatus(source.orderStatus),
+          orderStartedAt: trim(source.orderStartedAt),
+          orderCompletedAt: trim(source.orderCompletedAt),
+          orderCanceledAt: trim(source.orderCanceledAt),
+          orderCancelReason: trim(source.orderCancelReason) || trim(source.cancelReason)
+        };
+      };
+      const readDispatchCatalog = () => {
+        try {
+          const raw = localStorage.getItem(DISPATCH_STORAGE_KEY);
+          if (!raw) return [];
+          const parsed = JSON.parse(raw);
+          if (!Array.isArray(parsed)) return [];
+          return parsed.map(normalizeDispatchRecord).filter((item) => item.dispatchId);
+        } catch (error) {
+          return [];
+        }
+      };
+      const writeDispatchCatalog = (records) => {
+        try {
+          localStorage.setItem(DISPATCH_STORAGE_KEY, JSON.stringify(records));
+          return true;
+        } catch (error) {
+          showToast('保存失败：无法写入本地数据');
+          return false;
+        }
+      };
+      const showToast = (text) => {
+        if (!toastNode) return;
+        toastNode.textContent = text;
+        toastNode.classList.add('show');
+        if (toastTimer) {
+          window.clearTimeout(toastTimer);
+        }
+        toastTimer = window.setTimeout(() => {
+          toastNode.classList.remove('show');
+        }, 1700);
+      };
+      const appendFailureRecord = (record, reason) => {
+        const nextReason = trim(reason) || '司机拒绝接单';
+        const failureAt = formatDateTime();
+        const history = parseArray(record.failureRecords);
+        history.push({
+          at: failureAt,
+          reason: nextReason
+        });
+        return {
+          ...record,
+          failureRecords: history,
+          failureReason: nextReason,
+          failureAt
+        };
+      };
+      const updateDispatchById = (dispatchId, mutator) => {
+        const target = trim(dispatchId);
+        if (!target) return false;
+        const current = readDispatchCatalog();
+        let changed = false;
+        const next = current.map((item) => {
+          if (item.dispatchId !== target) return item;
+          changed = true;
+          return normalizeDispatchRecord(mutator({ ...item }));
+        });
+        if (!changed) {
+          showToast('未找到该调度单');
+          return false;
+        }
+        if (!writeDispatchCatalog(next)) return false;
+        return true;
+      };
+      const findDispatchById = (dispatchId) => {
+        const target = trim(dispatchId);
+        if (!target) return null;
+        const records = readDispatchCatalog();
+        return records.find((item) => item.dispatchId === target) || null;
+      };
+      const resolveOrderStatusFromRecord = (record = {}) => {
+        const explicit = normalizeOrderLifecycleStatus(record.orderStatus);
+        if (explicit) return explicit;
+        return normalizeAckStatus(record.appAckStatus) === APP_ACK_STATUS.CONFIRMED
+          ? ORDER_LIFECYCLE_STATUS.IN_TRANSIT
+          : '';
+      };
+      const statusTagClass = (ackStatus) => {
+        if (ackStatus === APP_ACK_STATUS.CONFIRMED) return 'confirmed';
+        if (ackStatus === APP_ACK_STATUS.REJECTED) return 'rejected';
+        return 'pending';
+      };
+      const statusTagText = (ackStatus) => {
+        if (ackStatus === APP_ACK_STATUS.CONFIRMED) return '已确认';
+        if (ackStatus === APP_ACK_STATUS.REJECTED) return '已拒绝';
+        return '待确认';
+      };
+      const orderStatusTagClass = (orderStatus) => {
+        if (orderStatus === ORDER_LIFECYCLE_STATUS.IN_PROGRESS) return 'in-progress';
+        if (orderStatus === ORDER_LIFECYCLE_STATUS.FINISHED) return 'finished';
+        if (orderStatus === ORDER_LIFECYCLE_STATUS.CANCELED) return 'canceled';
+        return 'in-transit';
+      };
+      const getPendingRecords = (records) => records.filter((item) => {
+        const ack = normalizeAckStatus(item.appAckStatus);
+        const status = trim(item.status);
+        if (status === DISPATCH_STATUS.CANCELED) return false;
+        if (status === DISPATCH_STATUS.COMPLETED) return false;
+        return ack === APP_ACK_STATUS.PENDING;
+      });
+      const resolveOrderSortTimestamp = (record = {}) => Math.max(
+        parseDateTimeToTimestamp(record.orderCompletedAt),
+        parseDateTimeToTimestamp(record.orderCanceledAt),
+        parseDateTimeToTimestamp(record.orderStartedAt),
+        parseDateTimeToTimestamp(record.appAckAt),
+        parseDateTimeToTimestamp(record.createdAt)
+      );
+      const resolveOrderIdFromRecord = (record = {}) => {
+        const explicit = trim(record.orderId || record.orderNo || record.orderCode);
+        if (explicit) return explicit;
+        const dispatchId = trim(record.dispatchId);
+        const digits = dispatchId.replace(/\D/g, '');
+        if (digits) return `#OD${digits.slice(-7).padStart(7, '0')}`;
+        const fallbackSeed = dispatchId || trim(record.createdAt);
+        const hash = fallbackSeed
+          .split('')
+          .reduce((sum, char) => sum + char.charCodeAt(0), 0);
+        return `#OD${String(hash % 10000000).padStart(7, '0')}`;
+      };
+      const getOrderRecords = (records) => records
+        .filter((item) => normalizeAckStatus(item.appAckStatus) === APP_ACK_STATUS.CONFIRMED)
+        .slice()
+        .sort((a, b) => {
+          const timestampGap = resolveOrderSortTimestamp(b) - resolveOrderSortTimestamp(a);
+          if (timestampGap !== 0) return timestampGap;
+          return trim(b.dispatchId).localeCompare(trim(a.dispatchId));
+        });
+      const renderPendingCard = (record) => `
+        <article class="card">
+          <div class="card-head">
+            <div class="dispatch-id">${record.dispatchId}</div>
+            <span class="tag ${statusTagClass(record.appAckStatus)}">${statusTagText(record.appAckStatus)}</span>
+          </div>
+          <dl class="meta">
+            <dt>企业名称</dt><dd>${record.companyName}</dd>
+            <dt>订单ID</dt><dd>${resolveOrderIdFromRecord(record)}</dd>
+            <dt>需求类型</dt><dd>${record.orderType}</dd>
+            <dt>派遣车辆</dt><dd>${record.vehicleId}</dd>
+            <dt>企业联系人</dt><dd>${record.contactName || '—'}</dd>
+            <dt>联系人电话</dt><dd>${record.contactPhone || '—'}</dd>
+            <dt>保电开始</dt><dd>${record.startTime || '—'}</dd>
+            <dt>地址</dt><dd>${record.address}</dd>
+          </dl>
+          <div class="actions">
+            <button class="btn confirm" data-action="confirm" data-dispatch-id="${record.dispatchId}" type="button">确认接单</button>
+            <button class="btn reject" data-action="reject" data-dispatch-id="${record.dispatchId}" type="button">拒绝</button>
+          </div>
+        </article>
+      `;
+      const renderOrderCard = (record) => {
+        const orderStatus = resolveOrderStatusFromRecord(record) || ORDER_LIFECYCLE_STATUS.IN_TRANSIT;
+        const orderId = resolveOrderIdFromRecord(record);
+        let actionsMarkup = '';
+        if (orderStatus === ORDER_LIFECYCLE_STATUS.IN_TRANSIT) {
+          actionsMarkup = `
+            <div class="actions">
+              <button class="btn start" data-action="start-order" data-dispatch-id="${record.dispatchId}" type="button">开始供电</button>
+              <button class="btn cancel" data-action="cancel-order" data-dispatch-id="${record.dispatchId}" type="button">取消订单</button>
+            </div>
+          `;
+        } else if (orderStatus === ORDER_LIFECYCLE_STATUS.IN_PROGRESS) {
+          actionsMarkup = `
+            <div class="actions single">
+              <button class="btn complete" data-action="complete-order" data-dispatch-id="${record.dispatchId}" type="button">完成供电</button>
+            </div>
+          `;
+        }
+
+        let statusHint = '司机已接单，正在前往现场。';
+        if (orderStatus === ORDER_LIFECYCLE_STATUS.IN_PROGRESS) {
+          statusHint = '订单已开始供电，可在司机端确认完成供电。';
+        } else if (orderStatus === ORDER_LIFECYCLE_STATUS.FINISHED) {
+          statusHint = '供电任务已完成，订单归档。';
+        } else if (orderStatus === ORDER_LIFECYCLE_STATUS.CANCELED) {
+          statusHint = '订单已取消，不再继续执行。';
+        }
+
+        return `
+          <article class="card">
+            <div class="card-head">
+              <div class="dispatch-id">${record.dispatchId}</div>
+              <span class="tag ${orderStatusTagClass(orderStatus)}">${orderStatus}</span>
+            </div>
+            <dl class="meta">
+              <dt>企业名称</dt><dd>${record.companyName}</dd>
+              <dt>订单ID</dt><dd>${orderId}</dd>
+              <dt>企业联系人</dt><dd>${record.contactName || '—'}</dd>
+              <dt>联系人电话</dt><dd>${record.contactPhone || '—'}</dd>
+              <dt>派遣车辆</dt><dd>${record.vehicleId}</dd>
+              <dt>APP确认时间</dt><dd>${record.appAckAt || '—'}</dd>
+              <dt>开始供电</dt><dd>${record.orderStartedAt || '—'}</dd>
+              <dt>完成供电</dt><dd>${record.orderCompletedAt || '—'}</dd>
+              <dt>取消时间</dt><dd>${record.orderCanceledAt || '—'}</dd>
+              <dt>地址</dt><dd>${record.address}</dd>
+            </dl>
+            ${actionsMarkup}
+            <div class="history-row">
+              <strong>状态说明</strong>
+              <span>${statusHint}</span>
+              ${record.orderCancelReason ? `<span>取消原因：${record.orderCancelReason}</span>` : ''}
+            </div>
+          </article>
+        `;
+      };
+      const renderEmpty = (title, desc) => `
+        <div class="empty">
+          <div>
+            <h3>${title}</h3>
+            <p>${desc}</p>
+          </div>
+        </div>
+      `;
+      const setTab = (tabName) => {
+        activeTab = tabName === 'orders' ? 'orders' : 'pending';
+        tabs.forEach((tab) => {
+          tab.classList.toggle('active', tab.dataset.tab === activeTab);
+        });
+      };
+      const render = () => {
+        const records = readDispatchCatalog();
+        const pending = getPendingRecords(records);
+        const orders = getOrderRecords(records);
+
+        pendingCountNode.textContent = String(pending.length);
+        orderCountNode.textContent = String(orders.length);
+        subNoteNode.textContent = activeTab === 'pending'
+          ? '只显示司机待接收确认的调度单'
+          : '在途、进行中、历史订单统一展示，按状态区分';
+
+        if (activeTab === 'pending') {
+          if (!pending.length) {
+            listNode.innerHTML = renderEmpty('暂无待接调度', '新调度单派发后会出现在这里，确认后自动进入订单页签。');
+            return;
+          }
+          listNode.innerHTML = pending.map((item) => renderPendingCard(item)).join('');
+          return;
+        }
+
+        if (!orders.length) {
+          listNode.innerHTML = renderEmpty('暂无订单', '司机确认调度后，会在这里按订单状态展示。');
+          return;
+        }
+        listNode.innerHTML = orders.map((item) => renderOrderCard(item)).join('');
+      };
+      const updateClock = () => {
+        const now = new Date();
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        clockNode.textContent = `${hh}:${mm}`;
+      };
+      const openRejectSheet = (dispatchId) => {
+        pendingRejectDispatchId = trim(dispatchId);
+        rejectReasonInput.value = '';
+        rejectTargetNode.textContent = `调度单：${pendingRejectDispatchId || '--'}`;
+        rejectSheet.classList.add('open');
+        rejectReasonInput.focus();
+      };
+      const closeRejectSheet = () => {
+        pendingRejectDispatchId = '';
+        rejectReasonInput.value = '';
+        rejectSheet.classList.remove('open');
+      };
+      const openCancelOrderSheet = (dispatchId) => {
+        pendingCancelOrderDispatchId = trim(dispatchId);
+        cancelOrderReasonInput.value = '';
+        cancelOrderTargetNode.textContent = `调度单：${pendingCancelOrderDispatchId || '--'}`;
+        cancelOrderSheet.classList.add('open');
+        cancelOrderReasonInput.focus();
+      };
+      const closeCancelOrderSheet = () => {
+        pendingCancelOrderDispatchId = '';
+        cancelOrderReasonInput.value = '';
+        cancelOrderSheet.classList.remove('open');
+      };
+      const handleConfirm = (dispatchId) => {
+        const ackAt = formatDateTime();
+        const ok = updateDispatchById(dispatchId, (record) => ({
+          ...record,
+          status: DISPATCH_STATUS.COMPLETED,
+          appAckStatus: APP_ACK_STATUS.CONFIRMED,
+          appAckAt: ackAt,
+          appAckPayload: {
+            source: 'driver-h5',
+            action: 'confirm',
+            at: ackAt
+          },
+          orderStatus: normalizeOrderLifecycleStatus(record.orderStatus) || ORDER_LIFECYCLE_STATUS.IN_TRANSIT,
+          orderStartedAt: '',
+          orderCompletedAt: '',
+          orderCanceledAt: '',
+          orderCancelReason: ''
+        }));
+        if (!ok) return;
+        render();
+        showToast('确认成功，调度已完成，订单进入在途');
+      };
+      const handleReject = (dispatchId, reason) => {
+        const nextReason = trim(reason) || '司机拒绝接单';
+        const ok = updateDispatchById(dispatchId, (record) => {
+          const ackAt = formatDateTime();
+          const updated = {
+            ...record,
+            status: DISPATCH_STATUS.FAILED,
+            appAckStatus: APP_ACK_STATUS.REJECTED,
+            appAckAt: ackAt,
+            appAckPayload: {
+              source: 'driver-h5',
+              action: 'reject',
+              reason: nextReason,
+              at: ackAt
+            },
+            orderStatus: '',
+            orderStartedAt: '',
+            orderCompletedAt: '',
+            orderCanceledAt: '',
+            orderCancelReason: ''
+          };
+          return appendFailureRecord(updated, nextReason);
+        });
+        if (!ok) return;
+        render();
+        showToast('已拒绝，调度状态已回写为调度失败');
+      };
+      const handleStartOrder = (dispatchId) => {
+        const current = findDispatchById(dispatchId);
+        if (!current) {
+          showToast('未找到该订单');
+          return;
+        }
+        if (normalizeAckStatus(current.appAckStatus) !== APP_ACK_STATUS.CONFIRMED) {
+          showToast('该订单尚未确认接单');
+          return;
+        }
+        const status = resolveOrderStatusFromRecord(current);
+        if (status !== ORDER_LIFECYCLE_STATUS.IN_TRANSIT) {
+          showToast('仅在途订单可开始供电');
+          return;
+        }
+        const startedAt = formatDateTime();
+        const ok = updateDispatchById(dispatchId, (record) => ({
+          ...record,
+          orderStatus: ORDER_LIFECYCLE_STATUS.IN_PROGRESS,
+          orderStartedAt: startedAt,
+          orderCompletedAt: '',
+          orderCanceledAt: '',
+          orderCancelReason: '',
+          appAckPayload: {
+            source: 'driver-h5',
+            action: 'start-order',
+            at: startedAt
+          }
+        }));
+        if (!ok) return;
+        render();
+        showToast('已开始供电，订单进入进行中');
+      };
+      const handleCompleteOrder = (dispatchId) => {
+        const current = findDispatchById(dispatchId);
+        if (!current) {
+          showToast('未找到该订单');
+          return;
+        }
+        if (normalizeAckStatus(current.appAckStatus) !== APP_ACK_STATUS.CONFIRMED) {
+          showToast('该订单尚未确认接单');
+          return;
+        }
+        const status = resolveOrderStatusFromRecord(current);
+        if (status !== ORDER_LIFECYCLE_STATUS.IN_PROGRESS) {
+          showToast('仅进行中订单可完成供电');
+          return;
+        }
+        const completedAt = formatDateTime();
+        const ok = updateDispatchById(dispatchId, (record) => ({
+          ...record,
+          orderStatus: ORDER_LIFECYCLE_STATUS.FINISHED,
+          orderCompletedAt: completedAt,
+          endTime: completedAt,
+          orderCanceledAt: '',
+          orderCancelReason: '',
+          appAckPayload: {
+            source: 'driver-h5',
+            action: 'complete-order',
+            at: completedAt
+          }
+        }));
+        if (!ok) return;
+        render();
+        showToast('供电完成，订单状态已更新为完成');
+      };
+      const handleCancelOrder = (dispatchId, reason) => {
+        const current = findDispatchById(dispatchId);
+        if (!current) {
+          showToast('未找到该订单');
+          return;
+        }
+        if (normalizeAckStatus(current.appAckStatus) !== APP_ACK_STATUS.CONFIRMED) {
+          showToast('该订单尚未确认接单');
+          return;
+        }
+        const status = resolveOrderStatusFromRecord(current);
+        if (status !== ORDER_LIFECYCLE_STATUS.IN_TRANSIT) {
+          showToast('仅在途订单可取消');
+          return;
+        }
+        const canceledAt = formatDateTime();
+        const cancelReason = trim(reason);
+        if (!cancelReason) {
+          showToast('请填写取消原因');
+          return;
+        }
+        const ok = updateDispatchById(dispatchId, (record) => ({
+          ...record,
+          orderStatus: ORDER_LIFECYCLE_STATUS.CANCELED,
+          orderCompletedAt: '',
+          orderCanceledAt: canceledAt,
+          orderCancelReason: cancelReason,
+          appAckPayload: {
+            source: 'driver-h5',
+            action: 'cancel-order',
+            reason: cancelReason,
+            at: canceledAt
+          }
+        }));
+        if (!ok) return;
+        render();
+        showToast('订单已取消');
+      };
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          setTab(tab.dataset.tab);
+          render();
+        });
+      });
+
+      refreshBtn.addEventListener('click', () => {
+        render();
+        showToast('已刷新');
+      });
+
+      listNode.addEventListener('click', (event) => {
+        const btn = event.target.closest('[data-action]');
+        if (!btn) return;
+        const dispatchId = btn.getAttribute('data-dispatch-id');
+        const action = btn.getAttribute('data-action');
+        if (action === 'confirm') {
+          handleConfirm(dispatchId);
+          return;
+        }
+        if (action === 'reject') {
+          openRejectSheet(dispatchId);
+          return;
+        }
+        if (action === 'start-order') {
+          handleStartOrder(dispatchId);
+          return;
+        }
+        if (action === 'complete-order') {
+          handleCompleteOrder(dispatchId);
+          return;
+        }
+        if (action === 'cancel-order') {
+          openCancelOrderSheet(dispatchId);
+        }
+      });
+
+      cancelRejectBtn.addEventListener('click', closeRejectSheet);
+      rejectSheet.addEventListener('click', (event) => {
+        if (event.target === rejectSheet) {
+          closeRejectSheet();
+        }
+      });
+      confirmRejectBtn.addEventListener('click', () => {
+        if (!pendingRejectDispatchId) return;
+        handleReject(pendingRejectDispatchId, rejectReasonInput.value);
+        closeRejectSheet();
+      });
+      cancelOrderBackBtn.addEventListener('click', closeCancelOrderSheet);
+      cancelOrderSheet.addEventListener('click', (event) => {
+        if (event.target === cancelOrderSheet) {
+          closeCancelOrderSheet();
+        }
+      });
+      confirmCancelOrderBtn.addEventListener('click', () => {
+        if (!pendingCancelOrderDispatchId) return;
+        const reason = trim(cancelOrderReasonInput.value);
+        if (!reason) {
+          showToast('请填写取消原因');
+          cancelOrderReasonInput.focus();
+          return;
+        }
+        handleCancelOrder(pendingCancelOrderDispatchId, reason);
+        closeCancelOrderSheet();
+      });
+
+      window.addEventListener('storage', (event) => {
+        if (event.key === DISPATCH_STORAGE_KEY) {
+          render();
+        }
+      });
+
+      updateClock();
+      render();
+      window.setInterval(updateClock, 10000);
+      window.setInterval(render, 5000);
+    })();
+  </script>
+</body>
+</html>
