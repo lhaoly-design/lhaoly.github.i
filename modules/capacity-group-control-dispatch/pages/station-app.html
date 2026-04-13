@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>电站信息界面（交互还原）</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #f2f4f8;
+      --ink: #1f2633;
+      --muted: #8b95a7;
+      --line: #edf0f5;
+      --accent: #2f7cff;
+      --good: #20b56c;
+      --card-shadow: 0 6px 14px rgba(16, 24, 48, 0.06);
+      --device-w: 402px;
+      --device-h: 874px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      font-family: "PingFang SC", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+    }
+
+    .frame {
+      width: var(--device-w);
+      height: var(--device-h);
+      margin: 16px auto 28px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(16, 24, 48, 0.08);
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .statusbar {
+      height: 26px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: #2d3445;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0));
+    }
+
+    .status-icons {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .status-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #2d3445;
+      opacity: 0.6;
+    }
+
+    .info-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #d6deea;
+      background: #fff;
+      color: #3a4256;
+      font-size: 11px;
+      text-decoration: none;
+      box-shadow: 0 3px 8px rgba(16, 24, 48, 0.06);
+      cursor: pointer;
+    }
+
+    .info-btn svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .info-btn:active {
+      transform: translateY(1px);
+    }
+
+    .hero {
+      padding: 8px 16px 2px;
+      text-align: center;
+      background: linear-gradient(180deg, #dbeaff 0%, #f7f8fb 62%);
+    }
+
+    .hero .kwh {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: #20262f;
+    }
+
+    .hero .kwh span {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-left: 4px;
+    }
+
+    .hero .sub {
+      font-size: 13px;
+      color: #7f8aa0;
+      margin-top: 2px;
+    }
+
+    .hero .date {
+      font-size: 11px;
+      color: #9aa4b4;
+      margin-top: 4px;
+    }
+
+    .hero .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #d5dbe6;
+      background: #fff;
+      color: #3a4256;
+      font-size: 11px;
+      margin-top: 6px;
+    }
+
+    .illustration {
+      margin: 6px auto 0;
+      width: 252px;
+      height: 150px;
+    }
+
+    .hero-meta {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #9aa4b4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .hero-meta .loc-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #c7cedc;
+      margin-right: 4px;
+      display: inline-block;
+    }
+
+    .hero-dots {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .hero-dots span {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #c7cedc;
+    }
+
+    .hero-dots span.active { background: #3a7cff; }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      padding: 10px 12px 6px;
+      text-align: center;
+      color: #7f8aa0;
+      font-size: 11px;
+    }
+
+    .stats-row .stat {
+      padding: 4px 6px;
+      position: relative;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .stats-row .stat:not(:last-child):after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: #eef2f7;
+    }
+
+    .stat strong {
+      display: block;
+      color: #2a3244;
+      font-size: 13px;
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    .state-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e9f9f0;
+      color: #22a764;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .cards-grid {
+      padding: 6px 12px 6px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "profit energy"
+        "profit energy2"
+        "social capacity"
+        "social power";
+      gap: 10px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px 10px 8px;
+      border: 1px solid var(--line);
+      box-shadow: var(--card-shadow);
+      min-height: 88px;
+      cursor: pointer;
+    }
+
+    .card .label {
+      font-size: 11px;
+      color: #7f8aa0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card .value {
+      margin-top: 6px;
+      font-size: 17px;
+      font-weight: 700;
+      color: #2a3244;
+    }
+
+    .card .unit {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    .profit { grid-area: profit; }
+    .social { grid-area: social; }
+    .energy { grid-area: energy; }
+    .energy2 { grid-area: energy2; }
+    .capacity { grid-area: capacity; }
+    .power { grid-area: power; }
+
+    .profit .row,
+    .social .row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .row-left {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .row-value {
+      font-size: 16px;
+      color: #2a3244;
+      font-weight: 700;
+    }
+
+    .row-unit,
+    .row-label {
+      font-size: 11px;
+      color: #9aa4b4;
+    }
+
+    .card-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #f0f1f5;
+    }
+
+    .card-icon svg {
+      width: 12px;
+      height: 12px;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .icon-orange { background: #fff7ef; border-color: #ffe1c5; }
+    .icon-red { background: #fff2f2; border-color: #ffd1d1; }
+    .icon-blue { background: #f2f7ff; border-color: #cfe0ff; }
+    .icon-green { background: #eefaf4; border-color: #c9efd9; }
+    .icon-amber { background: #fff7e8; border-color: #ffe3b0; }
+
+    .services {
+      padding: 6px 12px 14px;
+    }
+
+    .services .title {
+      font-size: 12px;
+      color: #7f8aa0;
+      font-weight: 600;
+      margin: 8px 0 10px;
+    }
+
+    .services-scroll {
+      overflow: hidden;
+    }
+    .services-scroll::-webkit-scrollbar { display: none; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 12px 10px;
+      padding-bottom: 4px;
+    }
+
+    .service-item {
+      text-align: center;
+      font-size: 10px;
+      color: #6a7488;
+      border-radius: 10px;
+      padding: 4px 2px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .service-item svg {
+      width: 22px;
+      height: 22px;
+      stroke: #a4adbf;
+      stroke-width: 1.6;
+      fill: none;
+      margin-bottom: 4px;
+    }
+
+    .service-item:active {
+      background: rgba(47, 124, 255, 0.08);
+    }
+
+    .nav {
+      height: 60px;
+      background: #fff;
+      border-top: 1px solid #e8ecf3;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: center;
+      font-size: 10px;
+      color: #a3aabb;
+    }
+
+    .nav .item {
+      text-align: center;
+      display: grid;
+      gap: 4px;
+      justify-items: center;
+      cursor: pointer;
+      border-radius: 10px;
+      padding: 4px 0;
+    }
+
+    .nav svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .nav .active { color: var(--accent); font-weight: 600; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 86px;
+      transform: translateX(-50%);
+      background: rgba(20, 24, 30, 0.85);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 20;
+    }
+    .toast.show { opacity: 1; }
+
+    .forecast-frame {
+      background: var(--bg);
+    }
+
+    .forecast-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      background: #fff;
+      border-bottom: 1px solid #e8ecf3;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .forecast-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #2a3244;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+      background: transparent;
+      color: #2a3244;
+      font-size: 12px;
+      padding: 2px 4px;
+      cursor: pointer;
+    }
+
+    .back-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .forecast-body {
+      padding: 12px 12px 16px;
+    }
+
+    .pf-card {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      box-shadow: var(--card-shadow);
+      padding: 10px 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .pf-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pf-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #2a3244;
+    }
+
+    .pf-legend {
+      display: flex;
+      gap: 8px;
+      font-size: 10px;
+      color: #7f8aa0;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .pf-legend .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .pf-legend .obs { background: #6aa9ff; }
+    .pf-legend .pred { background: #f2c15f; }
+    .pf-legend .actual { background: #7bd49a; }
+
+    .pf-chart-wrap {
+      margin-top: 10px;
+      background: #f7f9fc;
+      border-radius: 10px;
+      padding: 8px;
+    }
+
+    .pf-chart-wrap canvas {
+      width: 100%;
+      height: 180px;
+      display: block;
+    }
+
+    .pf-table {
+      margin-top: 10px;
+      border: 1px solid #eef2f7;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .pf-table table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10px;
+    }
+
+    .pf-table th,
+    .pf-table td {
+      padding: 6px 8px;
+      text-align: left;
+      border-bottom: 1px solid #eef2f7;
+    }
+
+    .pf-table th {
+      background: #f7f9fc;
+      font-weight: 600;
+      color: #5f6b80;
+    }
+
+    .pf-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .pf-meta {
+      font-size: 10px;
+      color: #9aa4b4;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame" id="stationView">
+    <div class="statusbar">
+      <span>9:41</span>
+      <div class="status-right">
+        <div class="status-icons">
+          <div class="status-dot"></div>
+          <div class="status-dot"></div>
+          <div class="status-dot"></div>
+          <div class="status-dot"></div>
+        </div>
+        <a class="info-btn" href="./owner-portal.html" aria-label="业主通知">
+          <svg viewBox="0 0 24 24">
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 7h18s-3 0-3-7"></path>
+            <path d="M13.7 21a2 2 0 0 1-3.4 0"></path>
+          </svg>
+          通知
+        </a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="kwh">20<span>kwh</span></div>
+      <div class="sub">今日发电量</div>
+      <div class="date">数据更新于 2024/10/09 20:02</div>
+      <div class="pill">防止逆流</div>
+
+      <div class="illustration">
+        <svg viewBox="0 0 360 210" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#cfe9ff" />
+              <stop offset="1" stop-color="#f7fbff" />
+            </linearGradient>
+            <radialGradient id="sun" cx="0.2" cy="0.2" r="0.4">
+              <stop offset="0" stop-color="#fff7c8" />
+              <stop offset="1" stop-color="#ffd07a" />
+            </radialGradient>
+            <linearGradient id="groundTop" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#e6f3ff" />
+              <stop offset="1" stop-color="#d9f0f2" />
+            </linearGradient>
+            <linearGradient id="groundFront" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#d7e7f5" />
+              <stop offset="1" stop-color="#cbdced" />
+            </linearGradient>
+            <linearGradient id="panelTop" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#33e2c1" />
+              <stop offset="1" stop-color="#2f7cff" />
+            </linearGradient>
+            <linearGradient id="panelSide" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#1c4f9f" />
+              <stop offset="1" stop-color="#153b7a" />
+            </linearGradient>
+            <linearGradient id="panelFrame" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#e7f6ff" />
+              <stop offset="1" stop-color="#b9d9f8" />
+            </linearGradient>
+            <linearGradient id="boxFront" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ffffff" />
+              <stop offset="1" stop-color="#dbe6f5" />
+            </linearGradient>
+            <linearGradient id="boxSide" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#c9d6ea" />
+              <stop offset="1" stop-color="#b3c3da" />
+            </linearGradient>
+            <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0f172a" flood-opacity="0.18" />
+            </filter>
+            <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+              <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#4df0c4" flood-opacity="0.45" />
+            </filter>
+            <linearGradient id="scan" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#b7fff0" stop-opacity="0" />
+              <stop offset="0.45" stop-color="#b7fff0" stop-opacity="0.8" />
+              <stop offset="0.55" stop-color="#b7fff0" stop-opacity="0.8" />
+              <stop offset="1" stop-color="#b7fff0" stop-opacity="0" />
+            </linearGradient>
+            <style>
+              .pulse { animation: pulse 2.8s ease-in-out infinite; }
+              .scan { animation: scan 3.2s linear infinite; }
+              .float { animation: float 6s ease-in-out infinite; }
+              .spark { animation: spark 2.6s ease-in-out infinite; }
+              @keyframes pulse {
+                0%, 100% { transform: scale(1); opacity: 0.7; }
+                50% { transform: scale(1.08); opacity: 1; }
+              }
+              @keyframes scan {
+                0% { transform: translateX(-120px); opacity: 0; }
+                15% { opacity: 0.8; }
+                50% { opacity: 0.8; }
+                100% { transform: translateX(160px); opacity: 0; }
+              }
+              @keyframes float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-6px); }
+              }
+              @keyframes spark {
+                0%, 100% { opacity: 0.2; }
+                50% { opacity: 0.9; }
+              }
+            </style>
+          </defs>
+
+          <rect x="0" y="0" width="360" height="210" fill="url(#sky)" />
+          <g class="pulse">
+            <circle cx="50" cy="36" r="24" fill="url(#sun)" />
+            <circle cx="50" cy="36" r="36" fill="#ffe8a5" opacity="0.35" />
+          </g>
+
+          <path d="M0 126 C70 102 150 108 210 126 C270 144 320 148 360 138 L360 210 L0 210 Z" fill="url(#groundTop)" />
+          <path d="M0 150 C80 128 160 132 230 150 C300 168 330 172 360 166 L360 210 L0 210 Z" fill="url(#groundFront)" />
+
+          <g filter="url(#shadow)">
+            <polygon points="36,128 132,110 152,138 56,156" fill="url(#panelTop)" />
+            <polygon points="56,156 152,138 152,150 56,170" fill="url(#panelSide)" />
+            <polygon points="36,128 56,156 56,170 36,142" fill="#173f86" />
+            <polygon points="44,132 128,116 146,138 62,152" fill="none" stroke="url(#panelFrame)" stroke-width="1.2" />
+            <g opacity="0.45">
+              <line x1="58" y1="140" x2="140" y2="124" stroke="#c7f4ff" stroke-width="1" />
+              <line x1="70" y1="152" x2="152" y2="136" stroke="#c7f4ff" stroke-width="1" />
+            </g>
+            <polygon points="44,132 128,116 146,138 62,152" fill="#ffffff" opacity="0.08" />
+
+            <polygon points="146,130 242,112 266,140 170,160" fill="url(#panelTop)" />
+            <polygon points="170,160 266,140 266,152 170,172" fill="url(#panelSide)" />
+            <polygon points="146,130 170,160 170,172 146,142" fill="#173f86" />
+            <polygon points="154,134 236,118 256,140 174,156" fill="none" stroke="url(#panelFrame)" stroke-width="1.2" />
+            <g opacity="0.45">
+              <line x1="172" y1="144" x2="246" y2="128" stroke="#c7f4ff" stroke-width="1" />
+              <line x1="184" y1="158" x2="258" y2="142" stroke="#c7f4ff" stroke-width="1" />
+            </g>
+            <polygon points="154,134 236,118 256,140 174,156" fill="#ffffff" opacity="0.08" />
+
+            <polygon points="244,136 312,122 332,144 264,160" fill="url(#panelTop)" />
+            <polygon points="264,160 332,144 332,154 264,170" fill="url(#panelSide)" />
+            <polygon points="244,136 264,160 264,170 244,146" fill="#173f86" />
+            <polygon points="252,140 306,128 324,144 270,156" fill="none" stroke="url(#panelFrame)" stroke-width="1.2" />
+            <polygon points="252,140 306,128 324,144 270,156" fill="#ffffff" opacity="0.08" />
+          </g>
+
+          <g filter="url(#shadow)">
+            <polygon points="250,88 292,82 300,104 258,110" fill="#cfe2f7" />
+            <polygon points="258,110 300,104 300,132 258,138" fill="url(#boxFront)" />
+            <polygon points="300,104 318,96 318,124 300,132" fill="url(#boxSide)" />
+            <polygon points="292,82 318,96 300,104 250,88" fill="#e6f2ff" />
+            <rect x="266" y="116" width="20" height="10" rx="3" fill="#a7c3e8" />
+            <circle cx="308" cy="114" r="6" fill="#2f7cff" />
+          </g>
+
+          <g filter="url(#glow)">
+            <path d="M56 98 C120 78 196 80 304 92" stroke="#67f0c6" stroke-width="2.4" fill="none" stroke-linecap="round" />
+            <circle cx="124" cy="86" r="3" fill="#67f0c6" />
+            <circle cx="204" cy="84" r="3" fill="#67f0c6" />
+            <circle cx="278" cy="90" r="3" fill="#67f0c6" />
+          </g>
+
+          <g opacity="0.55" class="float">
+            <circle cx="232" cy="54" r="10" fill="#ffffff" />
+            <circle cx="248" cy="54" r="12" fill="#ffffff" />
+            <circle cx="264" cy="54" r="9" fill="#ffffff" />
+          </g>
+
+          <g class="scan">
+            <rect x="40" y="118" width="140" height="6" rx="3" fill="url(#scan)" opacity="0.9" />
+            <rect x="150" y="118" width="150" height="6" rx="3" fill="url(#scan)" opacity="0.9" />
+          </g>
+
+          <g class="spark" opacity="0.8">
+            <circle cx="206" cy="66" r="2.2" fill="#7cf7d6" />
+            <circle cx="222" cy="72" r="1.6" fill="#7cf7d6" />
+            <circle cx="188" cy="72" r="1.4" fill="#7cf7d6" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="hero-meta">
+        <span class="loc-dot"></span>所在位置：成都市郫都区
+        <span class="hero-dots">
+          <span class="active"></span>
+          <span></span>
+          <span></span>
+        </span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat" data-name="当前发电功率">当前发电功率<strong>25 kwh</strong></div>
+      <div class="stat" data-name="运行情况">运行情况<strong><span class="state-pill">正常 ⚡</span></strong></div>
+      <div class="stat" data-name="已安全运行">已安全运行<strong>10 天</strong></div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card profit" data-name="收益">
+        <div class="label">
+          <span class="card-icon icon-orange">
+            <svg viewBox="0 0 24 24" stroke="#f5a623"><circle cx="12" cy="12" r="7" /><path d="M9 12h6" /></svg>
+          </span>
+          收益
+        </div>
+        <div class="row">
+          <span class="row-left"><span class="row-value">20</span><span class="row-unit">元</span></span>
+          <span class="row-label">今日预计收益</span>
+        </div>
+        <div class="row">
+          <span class="row-left"><span class="row-value">300</span><span class="row-unit">元</span></span>
+          <span class="row-label">累计收益</span>
+        </div>
+      </div>
+
+      <div class="card energy" data-name="累计发电量">
+        <div class="label">
+          <span class="card-icon icon-red">
+            <svg viewBox="0 0 24 24" stroke="#ff6b6b"><path d="M12 3v18" /><path d="M5 10h14" /></svg>
+          </span>
+          累计发电量
+        </div>
+        <div class="value">200<span class="unit">kwh</span></div>
+      </div>
+
+      <div class="card energy2" data-name="累计上网电量">
+        <div class="label">
+          <span class="card-icon icon-blue">
+            <svg viewBox="0 0 24 24" stroke="#3a7cff"><path d="M4 19h16" /><path d="M7 16v-6" /><path d="M12 16V5" /><path d="M17 16v-3" /></svg>
+          </span>
+          累计上网电量
+        </div>
+        <div class="value">200<span class="unit">kwh</span></div>
+      </div>
+
+      <div class="card social" data-name="社会贡献">
+        <div class="label">
+          <span class="card-icon icon-green">
+            <svg viewBox="0 0 24 24" stroke="#23b26d"><path d="M12 2C8 8 8 12 12 22" /><path d="M12 22C16 12 16 8 12 2" /></svg>
+          </span>
+          社会贡献
+        </div>
+        <div class="row">
+          <span class="row-left"><span class="row-value">0</span><span class="row-unit">吨</span></span>
+          <span class="row-label">二氧化碳减排量</span>
+        </div>
+        <div class="row">
+          <span class="row-left"><span class="row-value">0</span><span class="row-unit">吨</span></span>
+          <span class="row-label">节约标准煤</span>
+        </div>
+        <div class="row">
+          <span class="row-left"><span class="row-value">0</span><span class="row-unit">公顷</span></span>
+          <span class="row-label">等效植树数</span>
+        </div>
+      </div>
+
+      <div class="card capacity" data-name="装机容量">
+        <div class="label">
+          <span class="card-icon icon-amber">
+            <svg viewBox="0 0 24 24" stroke="#f5a623"><circle cx="12" cy="12" r="7" /><path d="M12 7v5l3 2" /></svg>
+          </span>
+          装机容量
+        </div>
+        <div class="value">1989<span class="unit">kwp</span></div>
+      </div>
+
+      <div class="card power" data-name="额定输出功率">
+        <div class="label">
+          <span class="card-icon icon-blue">
+            <svg viewBox="0 0 24 24" stroke="#3a7cff"><path d="M12 3v18" /><path d="M9 7h6" /></svg>
+          </span>
+          额定输出功率
+        </div>
+        <div class="value">20<span class="unit">kw</span></div>
+      </div>
+    </div>
+
+    <div class="services">
+      <div class="title">推荐服务</div>
+      <div class="services-scroll">
+        <div class="services-grid" id="services">
+          <div class="service-item" data-name="功率预测">
+            <svg viewBox="0 0 24 24"><path d="M4 19h16" /><path d="M7 16v-6" /><path d="M12 16V5" /><path d="M17 16v-3" /></svg>
+            功率预测
+          </div>
+          <div class="service-item" data-name="移动绿电">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8 8 8 12 12 22" /><path d="M12 22C16 12 16 8 12 2" /></svg>
+            移动绿电
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav" id="nav">
+      <div class="item" data-name="资讯中心">
+        <svg viewBox="0 0 24 24"><path d="M4 10l8-6 8 6" /><path d="M6 10v8h12v-8" /></svg>
+        资讯中心
+      </div>
+      <div class="item" data-name="精选商品">
+        <svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3" /><circle cx="16" cy="8" r="3" /><path d="M4 20h16" /></svg>
+        精选商品
+      </div>
+      <div class="item active" data-name="我的电站">
+        <svg viewBox="0 0 24 24"><path d="M4 18h16" /><path d="M7 18V8" /><path d="M12 18V6" /><path d="M17 18V10" /></svg>
+        我的电站
+      </div>
+      <div class="item" data-name="综合服务">
+        <svg viewBox="0 0 24 24"><path d="M12 2v20" /><path d="M6 8h12" /></svg>
+        综合服务
+      </div>
+      <div class="item" data-name="我的">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3" /><path d="M5 20c1.5-4 12.5-4 14 0" /></svg>
+        我的
+      </div>
+    </div>
+  </div>
+
+  <div class="frame forecast-frame" id="forecastView" hidden>
+    <div class="forecast-header">
+      <button class="back-btn" id="forecastBack" type="button" aria-label="返回电站信息">
+        <svg viewBox="0 0 24 24">
+          <path d="M15 6l-6 6 6 6" />
+        </svg>
+        返回
+      </button>
+      <div class="forecast-title">功率预测</div>
+      <div class="pf-meta">电站级</div>
+    </div>
+
+    <div class="forecast-body">
+      <div class="pf-card">
+        <div class="pf-card-head">
+          <div class="pf-title">发电功率(kW)</div>
+          <div class="pf-legend">
+            <span><i class="dot obs"></i>观察功率</span>
+            <span><i class="dot pred"></i>预测功率</span>
+            <span><i class="dot actual"></i>实际发电</span>
+          </div>
+        </div>
+        <div class="pf-chart-wrap">
+          <canvas id="pfChart" width="320" height="180" aria-label="功率预测曲线图"></canvas>
+        </div>
+      </div>
+
+      <div class="pf-card">
+        <div class="pf-card-head">
+          <div class="pf-title">预测明细</div>
+          <div class="pf-meta">2024-10-09</div>
+        </div>
+        <div class="pf-table">
+          <table>
+            <thead>
+              <tr>
+                <th>预测时间</th>
+                <th>观察功率(kW)</th>
+                <th>预测功率(kW)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>00:00</td><td>0.0</td><td>0.0</td></tr>
+              <tr><td>01:00</td><td>0.0</td><td>0.0</td></tr>
+              <tr><td>02:00</td><td>0.0</td><td>0.0</td></tr>
+              <tr><td>03:00</td><td>0.0</td><td>0.0</td></tr>
+              <tr><td>04:00</td><td>0.0</td><td>0.0</td></tr>
+              <tr><td>05:00</td><td>0.0</td><td>0.0</td></tr>
+              <tr><td>06:00</td><td>1.0</td><td>1.4</td></tr>
+              <tr><td>07:00</td><td>3.4</td><td>4.1</td></tr>
+              <tr><td>08:00</td><td>6.8</td><td>7.9</td></tr>
+              <tr><td>09:00</td><td>12.4</td><td>13.8</td></tr>
+              <tr><td>10:00</td><td>20.2</td><td>22.4</td></tr>
+              <tr><td>11:00</td><td>28.9</td><td>31.0</td></tr>
+              <tr><td>12:00</td><td>36.1</td><td>38.5</td></tr>
+              <tr><td>13:00</td><td>33.8</td><td>35.2</td></tr>
+              <tr><td>14:00</td><td>37.6</td><td>39.1</td></tr>
+              <tr><td>15:00</td><td>34.2</td><td>35.9</td></tr>
+              <tr><td>16:00</td><td>36.8</td><td>38.8</td></tr>
+              <tr><td>17:00</td><td>29.7</td><td>31.6</td></tr>
+              <tr><td>18:00</td><td>18.3</td><td>19.4</td></tr>
+              <tr><td>19:00</td><td>8.1</td><td>9.2</td></tr>
+              <tr><td>20:00</td><td>1.9</td><td>2.4</td></tr>
+              <tr><td>21:00</td><td>0.0</td><td>0.0</td></tr>
+              <tr><td>22:00</td><td>0.0</td><td>0.0</td></tr>
+              <tr><td>23:00</td><td>0.0</td><td>0.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    const showToast = (msg) => {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 1200);
+    };
+
+    const stationView = document.getElementById('stationView');
+    const forecastView = document.getElementById('forecastView');
+    const forecastBack = document.getElementById('forecastBack');
+    let chartReady = false;
+
+    const drawForecastChart = () => {
+      const canvas = document.getElementById('pfChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const series = {
+        times: [
+          "00:00","01:00","02:00","03:00","04:00","05:00",
+          "06:00","07:00","08:00","09:00","10:00","11:00",
+          "12:00","13:00","14:00","15:00","16:00","17:00",
+          "18:00","19:00","20:00","21:00","22:00","23:00"
+        ],
+        obs: [0,0,0,0,0,0,1.0,3.4,6.8,12.4,20.2,28.9,36.1,33.8,37.6,34.2,36.8,29.7,18.3,8.1,1.9,0,0,0],
+        pred: [0,0,0,0,0,0,1.4,4.1,7.9,13.8,22.4,31.0,38.5,35.2,39.1,35.9,38.8,31.6,19.4,9.2,2.4,0,0,0],
+        actual: [0,0,0,0,0,0,0.7,3.0,6.0,11.3,19.1,27.2,34.8,32.6,35.7,33.1,35.4,28.2,16.9,7.4,1.6,0,0,0]
+      };
+
+      const padding = { left: 28, right: 12, top: 12, bottom: 22 };
+      const width = rect.width;
+      const height = rect.height;
+      const plotW = width - padding.left - padding.right;
+      const plotH = height - padding.top - padding.bottom;
+      const maxVal = Math.max(...series.pred, ...series.actual, ...series.obs, 1);
+      const roundedMax = Math.ceil(maxVal / 10) * 10;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = "#e7ecf4";
+      ctx.fillStyle = "#9aa4b4";
+      ctx.font = "10px \"PingFang SC\", \"Noto Sans SC\", -apple-system, sans-serif";
+
+      for (let i = 0; i <= 4; i += 1) {
+        const y = padding.top + (plotH / 4) * i;
+        ctx.beginPath();
+        ctx.moveTo(padding.left, y);
+        ctx.lineTo(width - padding.right, y);
+        ctx.stroke();
+        const value = Math.round(roundedMax - (roundedMax / 4) * i);
+        ctx.fillText(String(value), 4, y + 3);
+      }
+
+      const drawLine = (data, color) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        data.forEach((val, idx) => {
+          const x = padding.left + (plotW / (data.length - 1)) * idx;
+          const y = padding.top + plotH - (val / roundedMax) * plotH;
+          if (idx === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+      };
+
+      drawLine(series.obs, "#6aa9ff");
+      drawLine(series.pred, "#f2c15f");
+      drawLine(series.actual, "#7bd49a");
+
+      ctx.fillStyle = "#9aa4b4";
+      ctx.font = "8px \"PingFang SC\", \"Noto Sans SC\", -apple-system, sans-serif";
+      series.times.forEach((label, idx) => {
+        const x = padding.left + (plotW / (series.times.length - 1)) * idx;
+        const y = height - 6;
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(-Math.PI / 4);
+        ctx.fillText(label, -10, 0);
+        ctx.restore();
+      });
+    };
+
+    const openForecast = () => {
+      stationView.hidden = true;
+      forecastView.hidden = false;
+      window.scrollTo(0, 0);
+      if (!chartReady) {
+        drawForecastChart();
+        chartReady = true;
+      }
+    };
+
+    const closeForecast = () => {
+      forecastView.hidden = true;
+      stationView.hidden = false;
+      window.scrollTo(0, 0);
+    };
+
+    forecastBack?.addEventListener('click', closeForecast);
+
+    document.querySelectorAll('.service-item').forEach((el) => {
+      el.addEventListener('click', () => {
+        const name = el.dataset.name;
+        if (name === '功率预测') {
+          openForecast();
+          return;
+        }
+        showToast(`已点击：${name}`);
+      });
+    });
+
+    document.querySelectorAll('.card, .stat').forEach((el) => {
+      el.addEventListener('click', () => showToast(`查看：${el.dataset.name || '详情'}`));
+    });
+
+    document.querySelectorAll('#nav .item').forEach((el) => {
+      el.addEventListener('click', () => {
+        document.querySelectorAll('#nav .item').forEach((i) => i.classList.remove('active'));
+        el.classList.add('active');
+        showToast(`切换：${el.dataset.name}`);
+      });
+    });
+  </script>
+</body>
+</html>

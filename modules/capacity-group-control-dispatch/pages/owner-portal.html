@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>业主通知确认</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f4f6;
+      --card: #ffffff;
+      --text: #1f2d3d;
+      --sub: #6c7a89;
+      --line: #e6ebf0;
+      --brand: #2f6fed;
+      --brand-soft: #eef4ff;
+      --ok: #19a56f;
+      --warn: #f0a23b;
+      --danger: #e35557;
+      --shadow: 0 10px 24px rgba(31, 45, 61, 0.06);
+      --radius: 18px;
+      --device-w: 402px;
+      --device-h: 874px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .app {
+      width: var(--device-w);
+      height: var(--device-h);
+      margin: 16px auto 28px;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .topbar {
+      height: 56px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      box-shadow: 0 1px 0 rgba(15, 20, 30, 0.06);
+    }
+    .topbar h1 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .icon-btn {
+      border: none;
+      background: transparent;
+      padding: 6px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-btn svg { width: 20px; height: 20px; }
+    .view { display: none; flex: 1; }
+    .view.active { display: block; }
+    .notice-list { padding: 12px 0 24px; }
+    .notice-card {
+      margin: 12px 16px;
+      padding: 14px 16px 12px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .notice-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .notice-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .notice-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 12px;
+      background: var(--brand-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .notice-time {
+      font-size: 12px;
+      color: var(--sub);
+    }
+    .notice-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .notice-desc {
+      font-size: 12.5px;
+      color: var(--sub);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .notice-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .link-btn {
+      border: none;
+      background: transparent;
+      color: var(--brand);
+      font-size: 13px;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+    .tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #eef1f5;
+      color: #546070;
+    }
+    .tag.ok { background: rgba(25, 165, 111, 0.15); color: var(--ok); }
+    .tag.warn { background: rgba(240, 162, 59, 0.18); color: #c47a1d; }
+    .tag.danger { background: rgba(227, 85, 87, 0.18); color: var(--danger); }
+
+    .empty {
+      margin: 48px 16px;
+      padding: 24px;
+      text-align: center;
+      color: var(--sub);
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .detail-wrap { padding: 14px 16px 24px; }
+    .detail-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+    .detail-title {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 0 0 6px;
+    }
+    .detail-sub {
+      font-size: 12.5px;
+      color: var(--sub);
+      margin-bottom: 14px;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 12px;
+      font-size: 13px;
+    }
+    .detail-grid div { line-height: 1.4; }
+    .detail-grid span {
+      display: block;
+      font-size: 12px;
+      color: var(--sub);
+      margin-bottom: 2px;
+    }
+    .detail-row {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--line);
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.6;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .btn {
+      border: none;
+      border-radius: 14px;
+      padding: 12px 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn.confirm { background: var(--brand); color: #fff; }
+    .btn.reject { background: #fff; color: var(--danger); border: 1px solid rgba(227, 85, 87, 0.4); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .btn.ghost {
+      background: #f2f4f7;
+      color: #2b3a4a;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 14, 20, 0.35);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      padding: 16px;
+    }
+    .modal.active { display: flex; }
+    .modal-card {
+      width: 100%;
+      max-width: 320px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 18px 16px 16px;
+      box-shadow: 0 16px 32px rgba(15, 20, 30, 0.18);
+      text-align: center;
+    }
+    .modal-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .modal-desc {
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .modal-actions .btn {
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      background: rgba(18, 23, 32, 0.86);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 10;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section id="listView" class="view active">
+      <div class="topbar">
+        <button class="icon-btn" type="button" id="listBack" aria-label="返回">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <h1>消息列表</h1>
+        <button class="icon-btn" type="button" aria-label="设置" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 8 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 3.4 15a1.65 1.65 0 0 0-1.51-1H1a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 2.6 8a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 8 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 8c.2.5.3 1.03.3 1.57a1.65 1.65 0 0 0 1.51 1H23a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="notice-list" id="noticeList"></div>
+      <div class="empty" id="noticeEmpty" style="display:none;">
+        暂无新的业主通知
+      </div>
+    </section>
+
+    <section id="detailView" class="view">
+      <div class="topbar">
+        <button class="icon-btn" type="button" id="detailBack" aria-label="返回">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <h1>业主通知确认</h1>
+        <span style="width:20px;"></span>
+      </div>
+      <div class="detail-wrap">
+        <div class="detail-card">
+          <div class="detail-title" id="detailTitle">群控群调方案通知</div>
+          <div class="detail-sub" id="detailMeta">-</div>
+          <div class="detail-grid" id="detailGrid"></div>
+          <div class="detail-row" id="detailNote">-</div>
+        </div>
+        <div class="actions">
+          <button class="btn confirm" type="button" id="confirmBtn">确认方案</button>
+          <button class="btn reject" type="button" id="rejectBtn">拒绝方案</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast">已提交</div>
+  <div class="modal" id="confirmModal">
+    <div class="modal-card">
+      <div class="modal-title" id="modalTitle">确认操作</div>
+      <div class="modal-desc" id="modalDesc">请确认是否提交该操作。</div>
+      <div class="modal-actions">
+        <button class="btn ghost" type="button" id="modalCancel">取消</button>
+        <button class="btn confirm" type="button" id="modalOk">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const QCA_STORAGE_KEY = "hzdz_qca_requests_v1";
+    const QCA_CHANNEL_KEY = "hzdz_qca_requests_channel_v1";
+    const QCA_API_URL = "/api/qca-requests";
+    const CLIENT_ID = `owner-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+    let qcaChannel = null;
+    try {
+      if ("BroadcastChannel" in window) qcaChannel = new BroadcastChannel(QCA_CHANNEL_KEY);
+    } catch (error) {
+      qcaChannel = null;
+    }
+
+    const $ = (id) => document.getElementById(id);
+    const listView = $("listView");
+    const detailView = $("detailView");
+    const noticeList = $("noticeList");
+    const noticeEmpty = $("noticeEmpty");
+    const listBack = $("listBack");
+    const detailBack = $("detailBack");
+    const detailTitle = $("detailTitle");
+    const detailMeta = $("detailMeta");
+    const detailGrid = $("detailGrid");
+    const detailNote = $("detailNote");
+    const confirmBtn = $("confirmBtn");
+    const rejectBtn = $("rejectBtn");
+    const toast = $("toast");
+    const confirmModal = $("confirmModal");
+    const modalTitle = $("modalTitle");
+    const modalDesc = $("modalDesc");
+    const modalCancel = $("modalCancel");
+    const modalOk = $("modalOk");
+    const STATION_APP_URL = "./station-app.html";
+
+    const parseTrim = (value) => (value ?? "").toString().trim();
+    const fmtTime = (ms) => new Date(ms).toLocaleString("zh-CN", { hour12: false });
+
+    const isOwnerNotified = (req) => {
+      const status = parseTrim(req?.ownerNotifyStatus || req?.ownerNotify || "");
+      if (status) {
+        const norm = status.toLowerCase();
+        if (norm === "sent" || norm === "notified" || norm === "true" || norm === "1") return true;
+        if (status === "已发送" || status === "已通知") return true;
+      }
+      if (Number.isFinite(Number(req?.ownerNotifyAtMs))) return true;
+      return Boolean(parseTrim(req?.ownerNotifyAtText || ""));
+    };
+
+    const normalizeConfirmStatus = (raw) => {
+      const text = parseTrim(raw);
+      if (!text) return "";
+      if (["已确认", "确认", "同意", "已同意"].includes(text)) return "已确认";
+      if (["已拒绝", "拒绝", "不同意"].includes(text)) return "已拒绝";
+      if (["未确认", "待确认"].includes(text)) return "未确认";
+      return text;
+    };
+
+    const getOwnerConfirmStatus = (row, station, req) => {
+      const raw = normalizeConfirmStatus(row?.ownerConfirmStatus || row?.confirmStatus || station?.ownerConfirmStatus || station?.ownerConfirm || "");
+      const notified = isOwnerNotified(req);
+      if (raw && raw !== "未确认") return raw;
+      if (raw === "未确认" && notified) return raw;
+      return notified ? "未确认" : "未发送通知";
+    };
+
+    const loadStations = () => {
+      try {
+        const raw = localStorage.getItem("hzdz_station_list_v1");
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (error) {
+        return [];
+      }
+    };
+
+    const saveStations = (rows) => {
+      try {
+        localStorage.setItem("hzdz_station_list_v1", JSON.stringify(Array.isArray(rows) ? rows : []));
+      } catch (error) {}
+    };
+
+    const findStation = (row, stations) => {
+      if (!row || !Array.isArray(stations)) return null;
+      const assetId = parseTrim(row.assetId || "");
+      const userId = parseTrim(row.userId || "");
+      return stations.find((item) => {
+        const meterId = parseTrim(item?.meter_id || item?.meter || "");
+        const stationId = parseTrim(item?.station_id || item?.id || "");
+        const uid = parseTrim(item?.user_id || item?.userId || "");
+        return (assetId && (assetId === meterId || assetId === stationId)) || (userId && userId === uid);
+      }) || null;
+    };
+
+    const loadQcaRequests = () => {
+      try {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", QCA_API_URL, false);
+        xhr.send(null);
+        if (xhr.status >= 200 && xhr.status < 300) {
+          const parsed = JSON.parse(xhr.responseText || "[]");
+          const rows = Array.isArray(parsed) ? parsed : [];
+          return rows.filter((item) => item && !item.isDemo);
+        }
+      } catch (error) {}
+      try {
+        const raw = localStorage.getItem(QCA_STORAGE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        const rows = Array.isArray(parsed) ? parsed : [];
+        return rows.filter((item) => item && !item.isDemo);
+      } catch (error) {
+        return [];
+      }
+    };
+
+    const saveQcaRequests = (rows) => {
+      const payload = Array.isArray(rows) ? rows : [];
+      try {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", QCA_API_URL, false);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+        xhr.send(JSON.stringify(payload));
+      } catch (error) {}
+      try {
+        localStorage.setItem(QCA_STORAGE_KEY, JSON.stringify(payload));
+      } catch (error) {}
+      if (qcaChannel) {
+        qcaChannel.postMessage({ type: "update", sender: CLIENT_ID, ts: Date.now() });
+      }
+    };
+
+    const onQcaUpdate = (handler) => {
+      if (qcaChannel) {
+        qcaChannel.addEventListener("message", (event) => {
+          if (event?.data?.type !== "update") return;
+          if (event.data.sender === CLIENT_ID) return;
+          handler();
+        });
+      }
+      window.addEventListener("storage", (event) => {
+        if (event.key !== QCA_STORAGE_KEY) return;
+        handler();
+      });
+    };
+
+    if (listBack) {
+      listBack.addEventListener("click", () => {
+        window.location.href = STATION_APP_URL;
+      });
+    }
+
+    const buildNotices = () => {
+      const requests = loadQcaRequests();
+      const stations = loadStations();
+      const notices = [];
+      requests.forEach((req) => {
+        if (!req || !isOwnerNotified(req)) return;
+        const report = req.report;
+        if (!report || !report.strategies) return;
+        const strategyId = parseTrim(req.confirmedStrategyId || report.recommendedId || "s1");
+        const rows = report?.strategies?.[strategyId] || [];
+        let picked = null;
+        let pickedIndex = -1;
+        rows.some((row, idx) => {
+          if (!row || row.needCtrl !== "是") return false;
+          picked = row;
+          pickedIndex = idx;
+          return true;
+        });
+        if (!picked) return;
+        const station = findStation(picked, stations);
+        const contact = station && Array.isArray(station.contacts) ? (station.contacts[0] || {}) : {};
+        const ownerName = parseTrim(contact.name || picked.userName || "");
+        const ownerType = parseTrim(contact.type || picked.userType || "");
+        const status = getOwnerConfirmStatus(picked, station, req);
+        const assetId = parseTrim(picked.assetId || "");
+        const userId = parseTrim(picked.userId || "");
+        const key = `${req.id || ""}::${assetId || userId || pickedIndex}`;
+        const notifiedText = parseTrim(req.ownerNotifyAtText || "");
+        const notifiedMs = Number.isFinite(Number(req.ownerNotifyAtMs))
+          ? Number(req.ownerNotifyAtMs)
+          : (notifiedText ? Date.parse(notifiedText.replace(/-/g, "/")) : 0);
+        const notifiedAt = notifiedText || (req.ownerNotifyAtMs ? fmtTime(req.ownerNotifyAtMs) : "-");
+        notices.push({
+          key,
+          reqId: req.id,
+          areaName: req.areaName || req.areaId || "-",
+          strategyId,
+          rowIndex: pickedIndex,
+          row: picked,
+          station,
+          ownerName: ownerName || "-",
+          ownerType,
+          status,
+          notifiedAt,
+          notifiedAtMs: Number.isFinite(notifiedMs) ? notifiedMs : 0
+        });
+      });
+      notices.sort((a, b) => (b.notifiedAtMs || 0) - (a.notifiedAtMs || 0));
+      return notices;
+    };
+
+    const statusTagClass = (status) => {
+      if (status === "已确认") return "ok";
+      if (status === "已拒绝") return "danger";
+      return "warn";
+    };
+
+    const renderList = () => {
+      const notices = buildNotices();
+      appState.notices = notices;
+      noticeList.innerHTML = notices.map((notice) => {
+        const title = "群控群调方案通知";
+        const ownerTypeText = notice.ownerType && notice.ownerType !== "-" ? `（${notice.ownerType}）` : "";
+        const desc = `台区：${notice.areaName}，业主：${notice.ownerName}${ownerTypeText}`;
+        return `
+          <div class="notice-card" data-notice-key="${notice.key}">
+            <div class="notice-head">
+              <div class="notice-brand">
+                <span class="notice-logo">电</span>
+                新能源服务
+              </div>
+              <div class="notice-time">${notice.notifiedAt}</div>
+            </div>
+            <div class="notice-title">${title}</div>
+            <div class="notice-desc">${desc}</div>
+            <div class="notice-footer">
+              <button class="link-btn" type="button">查看详情</button>
+              <span class="tag ${statusTagClass(notice.status)}">${notice.status}</span>
+            </div>
+          </div>
+        `;
+      }).join("");
+      noticeEmpty.style.display = notices.length ? "none" : "block";
+    };
+
+    const showToast = (text) => {
+      toast.textContent = text;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 1500);
+    };
+
+    const setView = (view) => {
+      listView.classList.toggle("active", view === "list");
+      detailView.classList.toggle("active", view === "detail");
+    };
+
+    const openDetail = (notice) => {
+      if (!notice) return;
+      appState.currentKey = notice.key;
+      setView("detail");
+      const stationName = parseTrim(notice.station?.station_name || notice.station?.name || "-");
+      const stationId = parseTrim(notice.station?.station_id || notice.station?.id || "-");
+      const ownerPhone = parseTrim((notice.station?.contacts?.[0] || {}).phone || "-");
+      detailTitle.textContent = "群控群调方案通知";
+      detailMeta.textContent = `通知时间：${notice.notifiedAt}`;
+
+      const gridRows = [
+        { label: "请求编号", value: notice.reqId || "-" },
+        { label: "电站名称", value: stationName || "-" },
+        { label: "电站编号", value: stationId || "-" },
+        { label: "业主姓名", value: notice.ownerName || "-" },
+        { label: "联系方式", value: ownerPhone || "-" },
+        { label: "状态", value: notice.status || "-" }
+      ];
+      detailGrid.innerHTML = gridRows.map((row) => `
+        <div>
+          <span>${row.label}</span>
+          <strong>${row.value}</strong>
+        </div>
+      `).join("");
+
+      const startText = parseTrim(notice.row?.startText || "-");
+      const endText = parseTrim(notice.row?.endText || "-");
+      const powerText = parseTrim(notice.row?.powerText || "-");
+      const ratioText = parseTrim(notice.row?.ratioText || "-");
+      detailNote.textContent = `控制时段：${startText} - ${endText}，限发功率：${powerText}（${ratioText}）。`;
+
+      const actionDisabled = notice.status === "已确认" || notice.status === "已拒绝";
+      confirmBtn.disabled = actionDisabled;
+      rejectBtn.disabled = actionDisabled;
+    };
+
+    const findNoticeByKey = (key) => appState.notices.find((item) => item.key === key) || null;
+
+    const applyDecision = (decision) => {
+      const current = findNoticeByKey(appState.currentKey);
+      if (!current) return;
+      const list = loadQcaRequests();
+      const req = list.find((item) => item && item.id === current.reqId);
+      if (!req || !req.report || !req.report.strategies) return;
+
+      const nowMs = Date.now();
+      const nowText = fmtTime(nowMs);
+      const assetId = parseTrim(current.row?.assetId || "");
+      const userId = parseTrim(current.row?.userId || "");
+      const updateRow = (row) => {
+        row.ownerConfirmStatus = decision;
+        row.ownerConfirmAtMs = nowMs;
+        row.ownerConfirmAtText = nowText;
+      };
+
+      let matched = false;
+      Object.keys(req.report.strategies || {}).forEach((key) => {
+        const rows = req.report.strategies[key];
+        if (!Array.isArray(rows)) return;
+        rows.forEach((row, idx) => {
+          const matchAsset = assetId && parseTrim(row.assetId || "") === assetId;
+          const matchUser = userId && parseTrim(row.userId || "") === userId;
+          const matchIndex = key === current.strategyId && idx === current.rowIndex;
+          if (matchAsset || matchUser || matchIndex) {
+            updateRow(row);
+            matched = true;
+          }
+        });
+      });
+
+      if (!matched) {
+        const rows = req.report.strategies[current.strategyId] || [];
+        const row = rows[current.rowIndex];
+        if (row) updateRow(row);
+      }
+
+      saveQcaRequests(list);
+
+      const stations = loadStations();
+      if (stations.length) {
+        const station = findStation(current.row, stations);
+        if (station) {
+          station.ownerConfirmStatus = decision;
+          station.ownerConfirmAtMs = nowMs;
+          station.ownerConfirmAtText = nowText;
+          saveStations(stations);
+        }
+      }
+
+      renderList();
+      const refreshed = findNoticeByKey(current.key);
+      if (refreshed) openDetail(refreshed);
+      showToast(decision === "已确认" ? "已确认方案" : "已拒绝方案");
+    };
+
+    const appState = {
+      notices: [],
+      currentKey: "",
+      pendingDecision: ""
+    };
+
+    noticeList.addEventListener("click", (event) => {
+      const card = event.target.closest(".notice-card");
+      if (!card) return;
+      const key = card.dataset.noticeKey || "";
+      const notice = findNoticeByKey(key);
+      if (!notice) return;
+      openDetail(notice);
+    });
+
+    detailBack.addEventListener("click", () => {
+      setView("list");
+    });
+
+    const openConfirmModal = (decision) => {
+      appState.pendingDecision = decision;
+      if (decision === "已确认") {
+        modalTitle.textContent = "确认方案";
+        modalDesc.textContent = "确认后将反馈给供电局与运营端。";
+      } else {
+        modalTitle.textContent = "拒绝方案";
+        modalDesc.textContent = "拒绝后将反馈给供电局与运营端。";
+      }
+      confirmModal.classList.add("active");
+    };
+
+    const closeConfirmModal = () => {
+      confirmModal.classList.remove("active");
+      appState.pendingDecision = "";
+    };
+
+    confirmBtn.addEventListener("click", () => openConfirmModal("已确认"));
+    rejectBtn.addEventListener("click", () => openConfirmModal("已拒绝"));
+
+    modalCancel.addEventListener("click", closeConfirmModal);
+    confirmModal.addEventListener("click", (event) => {
+      if (event.target === confirmModal) closeConfirmModal();
+    });
+    modalOk.addEventListener("click", () => {
+      if (!appState.pendingDecision) return;
+      applyDecision(appState.pendingDecision);
+      closeConfirmModal();
+    });
+
+    onQcaUpdate(() => {
+      if (listView.classList.contains("active")) {
+        renderList();
+      } else {
+        renderList();
+        const notice = findNoticeByKey(appState.currentKey);
+        if (notice) openDetail(notice);
+      }
+    });
+
+    renderList();
+  </script>
+</body>
+</html>
